@@ -28,6 +28,18 @@ pub struct Paragraph {
     pub error: Option<String>,
 }
 
+fn default_paper_profile() -> String {
+    "nature-omics".to_string()
+}
+
+fn default_translate_quality() -> String {
+    "high".to_string()
+}
+
+fn default_true() -> bool {
+    true
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BilingualDoc {
@@ -36,6 +48,8 @@ pub struct BilingualDoc {
     pub title: String,
     pub created_at: String,
     pub updated_at: String,
+    #[serde(default)]
+    pub profile: Option<String>,
     pub paragraphs: Vec<Paragraph>,
 }
 
@@ -63,6 +77,8 @@ pub struct AppConfig {
     pub version: u32,
     pub providers: Vec<ProviderConfig>,
     pub active_provider_id: Option<String>,
+    #[serde(default)]
+    pub polish_provider_id: Option<String>,
     pub theme: String,
     pub zh_font_size: f64,
     pub en_font_size: f64,
@@ -70,6 +86,12 @@ pub struct AppConfig {
     pub auto_translate: bool,
     pub auto_delay_ms: u32,
     pub default_scene: String,
+    #[serde(default = "default_paper_profile")]
+    pub paper_profile: String,
+    #[serde(default = "default_translate_quality")]
+    pub translate_quality: String,
+    #[serde(default = "default_true")]
+    pub show_author_slots: bool,
     pub glossary_text: String,
     pub custom_prompt: String,
     pub recent_docs: Vec<RecentDoc>,
@@ -416,4 +438,56 @@ fn sanitize_dir_name(s: &str) -> String {
             }
         })
         .collect()
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn legacy_config_and_doc_deserialize_with_defaults() {
+        let old_cfg = r#"{
+            "version": 1,
+            "providers": [],
+            "activeProviderId": null,
+            "theme": "light",
+            "zhFontSize": 16,
+            "enFontSize": 15,
+            "splitRatio": 0.5,
+            "autoTranslate": false,
+            "autoDelayMs": 2000,
+            "defaultScene": "results",
+            "glossaryText": "",
+            "customPrompt": "",
+            "recentDocs": [],
+            "lastOpenedPath": null
+        }"#;
+        let cfg: AppConfig = serde_json::from_str(old_cfg).expect("旧版 AppConfig 应兼容解析");
+        assert_eq!(cfg.paper_profile, "nature-omics");
+        assert_eq!(cfg.translate_quality, "high");
+        assert_eq!(cfg.polish_provider_id, None);
+        assert!(cfg.show_author_slots);
+
+        let old_doc = r#"{
+            "formatVersion": 1,
+            "docId": "d1",
+            "title": "Demo",
+            "createdAt": "2026-01-01T00:00:00Z",
+            "updatedAt": "2026-01-01T00:00:00Z",
+            "paragraphs": [{
+                "id": "p1",
+                "zh": "测试",
+                "en": "Test",
+                "enSourceZh": "测试",
+                "enEdited": false,
+                "enPending": null,
+                "scene": "conclusion",
+                "error": null
+            }]
+        }"#;
+        let doc: BilingualDoc = serde_json::from_str(old_doc).expect("旧版 BilingualDoc 应兼容解析");
+        assert_eq!(doc.profile, None);
+        assert_eq!(doc.paragraphs[0].scene, "conclusion");
+    }
 }

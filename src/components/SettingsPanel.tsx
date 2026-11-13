@@ -4,9 +4,9 @@ import { X, Plus, Trash2, PlugZap, CheckCircle2, KeyRound } from 'lucide-react'
 import { useStore } from '../store/docStore'
 import { api } from '../lib/commands'
 import { parseGlossaryText, renderGlossaryText } from '../lib/glossary'
-import { SCENE_LABELS } from '../lib/prompts'
+import { SCENE_LABELS, PROFILE_LABELS, QUALITY_LABELS } from '../lib/prompts'
 import { nanoid } from '../lib/nanoid'
-import type { Scene } from '../types'
+import type { PaperProfile, Scene, TranslateQuality } from '../types'
 
 export default function SettingsPanel() {
   const config = useStore((s) => s.config)
@@ -203,6 +203,72 @@ export default function SettingsPanel() {
                 ))}
               </select>
               <span className="hint" style={{ margin: 0 }}>新段落使用的写作场景;每段可单独调整</span>
+            </div>
+          </div>
+
+          {/* ---- 学术润色引擎 (biomedical-polish) ---- */}
+          <div className="settings-section">
+            <div className="sec-title">顶刊润色引擎与文风基准</div>
+            <div className="form-row">
+              <label>论文体裁</label>
+              <select
+                className="model-select long"
+                value={config.paperProfile}
+                onChange={(e) => void updateConfig({ paperProfile: e.target.value as PaperProfile })}
+              >
+                {(Object.keys(PROFILE_LABELS) as PaperProfile[]).map((p) => (
+                  <option key={p} value={p}>{PROFILE_LABELS[p]}</option>
+                ))}
+              </select>
+            </div>
+            <div className="form-row">
+              <label>译写标准</label>
+              <select
+                className="model-select long"
+                value={config.translateQuality}
+                onChange={(e) => void updateConfig({ translateQuality: e.target.value as TranslateQuality })}
+              >
+                {(Object.keys(QUALITY_LABELS) as TranslateQuality[]).map((q) => (
+                  <option key={q} value={q}>{QUALITY_LABELS[q]}</option>
+                ))}
+              </select>
+            </div>
+            <div className="form-row">
+              <label>润色/回炉模型</label>
+              <select
+                className="model-select long"
+                value={config.polishProviderId ?? ''}
+                onChange={(e) => {
+                  const v = e.target.value || null
+                  void updateConfig({ polishProviderId: v })
+                  if (v) void loadApiKeyState(v)
+                }}
+              >
+                <option value="">跟随主翻译模型（{active ? `${active.name} · ${active.model}` : '未选'}）</option>
+                {config.providers.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name} · {p.model}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <p className="hint" style={{ marginBottom: 8 }}>
+              建议搭配：主模型选轻快/本地直译模型（如 Hunyuan-MT-7B），「润色/回炉模型」指定 DeepSeek / GPT 等强指令模型，实现“译后本地体检 → 红牌自动纯减法回炉”闭环。
+            </p>
+            <div className="form-row">
+              <label>作者视角槽</label>
+              <span className="switch">
+                <input
+                  type="checkbox"
+                  checked={config.showAuthorSlots}
+                  onChange={(e) => void updateConfig({ showAuthorSlots: e.target.checked })}
+                  id="show-author-slots"
+                />
+                <label className="track" htmlFor="show-author-slots" />
+              </span>
+              <span className="hint" style={{ margin: 0 }}>
+                检测到方法决策、预期反差或空泛局限时，在段末提供一句话补充意图插槽（默认折叠）
+              </span>
             </div>
           </div>
 

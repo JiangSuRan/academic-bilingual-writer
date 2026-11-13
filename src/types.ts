@@ -1,6 +1,30 @@
 // 数据模型:前端与 Rust 通过 serde(camelCase)共享同一结构
 
-export type Scene = 'abstract' | 'introduction' | 'methods' | 'results' | 'discussion'
+export type Scene =
+  | 'abstract'
+  | 'introduction'
+  | 'methods'
+  | 'results'
+  | 'discussion'
+  | 'conclusion'
+  | 'figure_legends'
+
+export type PaperProfile =
+  | 'nature-omics'
+  | 'cell-omics'
+  | 'method-tool'
+  | 'general-clinical'
+
+export type TranslateQuality = 'fast' | 'high' | 'two-pass'
+
+export type AiMode =
+  | 'translate'
+  | 'polish'
+  | 'compress'
+  | 'grammar'
+  | 'simplify'
+  | 'rework'
+  | 'authorInsert'
 
 export type ParaStatus =
   | 'untranslated'
@@ -10,16 +34,15 @@ export type ParaStatus =
   | 'translating'
   | 'failed'
 
-/** 一对中英段落;id 是双栏对应的唯一锚点,插入/删除/移动都不会破坏其它段落的对应关系 */
 export interface Paragraph {
   id: string
   zh: string
   en: string
-  /** 生成当前英文时的中文快照,用于派生"中文已修改"状态 */
+  /** 最近一次生成当前英文时对应的中文快照,用来判断 stale */
   enSourceZh: string | null
-  /** 最近一次 AI 写入之后,英文是否被人工编辑过(人工编辑过的英文 AI 永不自动覆盖) */
+  /** 英文是否被用户手工改过 —— 一旦为 true,后续翻译只写入 enPending */
   enEdited: boolean
-  /** 重译/润色等产生的新结果缓冲,待用户"替换 / 丢弃"确认后才写入 en */
+  /** 新译/润色缓冲:enEdited 为 true(或手动重译/润色)时放这里,由用户一键接受/丢弃 */
   enPending: string | null
   scene: Scene
   error: string | null
@@ -31,6 +54,8 @@ export interface BilingualDoc {
   title: string
   createdAt: string
   updatedAt: string
+  /** 可选文稿级体裁覆盖;未设置时沿用全局 AppConfig.paperProfile */
+  profile?: PaperProfile | null
   paragraphs: Paragraph[]
 }
 
@@ -52,6 +77,8 @@ export interface AppConfig {
   version: number
   providers: ProviderConfig[]
   activeProviderId: string | null
+  /** 可选：专门负责润色 / 精缩 / 回炉重修的模型 ID（未设则复用 activeProviderId） */
+  polishProviderId: string | null
   theme: 'light' | 'dark'
   zhFontSize: number
   enFontSize: number
@@ -59,6 +86,9 @@ export interface AppConfig {
   autoTranslate: boolean
   autoDelayMs: number
   defaultScene: Scene
+  paperProfile: PaperProfile
+  translateQuality: TranslateQuality
+  showAuthorSlots: boolean
   glossaryText: string
   customPrompt: string
   recentDocs: RecentDoc[]

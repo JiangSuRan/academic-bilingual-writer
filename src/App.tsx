@@ -5,12 +5,14 @@ import { api } from './lib/commands'
 import Toolbar from './components/Toolbar'
 import Workspace from './components/Workspace'
 import SettingsPanel from './components/SettingsPanel'
+import ReviewModal from './components/ReviewModal'
 import { AlertCircle, CheckCircle2, Info } from 'lucide-react'
 
 export default function App() {
   const booted = useStore((s) => s.booted)
   const toast = useStore((s) => s.toast)
   const settingsOpen = useStore((s) => s.settingsOpen)
+  const reviewOpen = useStore((s) => s.reviewOpen)
   const boot = useStore((s) => s.boot)
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function App() {
       <Toolbar />
       <Workspace />
       {settingsOpen && <SettingsPanel />}
+      {reviewOpen && <ReviewModal />}
       {toast && <Toast kind={toast.kind} text={toast.text} />}
     </div>
   )

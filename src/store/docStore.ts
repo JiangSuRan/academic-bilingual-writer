@@ -9,7 +9,15 @@ import { initAiEvents, streamChat, cancelAi, testConnection } from '../lib/ai'
 import { buildMessages, type AiMode } from '../lib/prompts'
 import { parseGlossaryText, pickGlossary } from '../lib/glossary'
 import { sanitizeModelOutput, paraStatus, buildEnglishExport, buildBilingualExport, boundText } from '../lib/paragraphs'
-import type { AppConfig, BilingualDoc, Paragraph, Scene } from '../types'
+import {
+  analyzeParagraphStyle,
+  auditEnglishPolish,
+  auditZhToEnFidelity,
+  buildSectionCoordContext,
+  type StyleFlag,
+  type ZhEnFidelityIssue,
+} from '../lib/polishAudit'
+import type { AppConfig, BilingualDoc, PaperProfile, Paragraph, ProviderConfig, Scene } from '../types'
 
 export const DEFAULT_CONFIG: AppConfig = {
   version: 1,
@@ -18,6 +26,7 @@ export const DEFAULT_CONFIG: AppConfig = {
     { id: 'p-deepseek', name: 'DeepSeek', baseUrl: 'https://api.deepseek.com/v1', model: 'deepseek-chat', temperature: 0.3 },
   ],
   activeProviderId: 'p-default',
+  polishProviderId: null,
   theme: 'light',
   zhFontSize: 16,
   enFontSize: 15,
@@ -25,6 +34,9 @@ export const DEFAULT_CONFIG: AppConfig = {
   autoTranslate: false,
   autoDelayMs: 2000,
   defaultScene: 'results',
+  paperProfile: 'nature-omics',
+  translateQuality: 'high',
+  showAuthorSlots: true,
   glossaryText: '',
   customPrompt: '',
   recentDocs: [],
@@ -37,10 +49,11 @@ export const DEFAULT_DOC: () => BilingualDoc = () => ({
   title: '未命名文稿',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
+  profile: null,
   paragraphs: [makeParagraph()],
 })
 
-export function makeParagraph(): Paragraph {
+export function makeParagraph(scene: Scene = 'results'): Paragraph {
   return {
     id: nanoid(),
     zh: '',
@@ -48,7 +61,7 @@ export function makeParagraph(): Paragraph {
     enSourceZh: null,
     enEdited: false,
     enPending: null,
-    scene: 'results',
+    scene,
     error: null,
   }
 }
@@ -59,6 +72,19 @@ interface SaveState {
   lastSavedAt: string | null
 }
 
+export interface CompressPreviewState {
+  scene: Scene
+  text: string
+  loading: boolean
+  error?: string
+}
+
+export interface RunExtraOpts {
+  authorNote?: string
+  reworkFlags?: StyleFlag[]
+  fidelityIssues?: ZhEnFidelityIssue[]
+}
+
 interface DocState {
   booted: boolean
   doc: BilingualDoc
@@ -66,6 +92,8 @@ interface DocState {
   save: SaveState
   config: AppConfig
   settingsOpen: boolean
+  reviewOpen: boolean
+  compressPreview: CompressPreviewState | null
   /** 请求窗口关闭时暂存的动作,由 Rust 端 close 事件触发 */
   translatingIds: Record<string, true>
   failedIds: Record<string, true>
@@ -79,6 +107,7 @@ interface DocState {
   openDocDialog(): Promise<void>
   saveDoc(): Promise<void>
   setTitle(t: string): void
+  setDocProfile(profile: PaperProfile | null): void
   updateZh(id: string, text: string, composing: boolean): void
   updateEn(id: string, text: string): void
   setScene(id: string, scene: Scene): void
@@ -88,7 +117,8 @@ interface DocState {
 
   translate(id: string, opts?: { force?: boolean }): Promise<void>
   translateAllPending(): Promise<void>
-  polish(id: string, mode: Exclude<AiMode, 'translate'>, force?: boolean): Promise<void>
+  polish(id: string, mode: Exclude<AiMode, 'translate'>, force?: boolean, extra?: RunExtraOpts): Promise<void>
+  insertAuthorNote(id: string, text: string, directEnglish?: boolean): Promise<void>
   cancel(id: string): void
   acceptPending(id: string): void
   discardPending(id: string): void
@@ -107,6 +137,9 @@ interface DocState {
   exportBilingualTxt(): Promise<void>
 
   openSettings(open: boolean): void
+  openReview(open: boolean): void
+  generateSectionCompressPreview(scene: Scene): Promise<void>
+  clearSectionCompressPreview(): void
   showToast(kind: 'info' | 'error' | 'success', text: string): void
 }
 
@@ -132,6 +165,8 @@ export const useStore = create<DocState>((set, get) => ({
   save: { dirty: false, saving: false, lastSavedAt: null },
   config: DEFAULT_CONFIG,
   settingsOpen: false,
+  reviewOpen: false,
+  compressPreview: null,
   translatingIds: {},
   failedIds: {},
   streamingEn: {},
@@ -149,6 +184,9 @@ export const useStore = create<DocState>((set, get) => ({
     if (!config.providers.length) config.providers = DEFAULT_CONFIG.providers
     if (!config.providers.some((p) => p.id === config.activeProviderId)) {
       config.activeProviderId = config.providers[0]?.id ?? null
+    }
+    if (config.polishProviderId && !config.providers.some((p) => p.id === config.polishProviderId)) {
+      config.polishProviderId = null
     }
     set({ config, booted: true })
     document.documentElement.dataset.theme = config.theme
@@ -218,6 +256,11 @@ export const useStore = create<DocState>((set, get) => ({
     scheduleAutoSave(get, set)
   },
 
+  setDocProfile(profile: PaperProfile | null) {
+    set({ doc: touchDoc({ ...get().doc, profile }) })
+    scheduleAutoSave(get, set)
+  },
+
   /** 中文编辑:组合输入期间只更新文本,不触发自动翻译判定 */
   updateZh(id: string, text: string, composing: boolean) {
     const doc = touchDoc({ ...get().doc, paragraphs: get().doc.paragraphs.map((p) => (p.id === id ? { ...p, zh: text } : p)) })
@@ -255,9 +298,10 @@ export const useStore = create<DocState>((set, get) => ({
   },
 
   addAfter(id: string | null) {
-    const p = makeParagraph()
     const paras = [...get().doc.paragraphs]
     const idx = id ? paras.findIndex((x) => x.id === id) : paras.length - 1
+    const baseScene = (idx >= 0 ? paras[idx]?.scene : undefined) ?? get().config.defaultScene ?? 'results'
+    const p = makeParagraph(baseScene)
     paras.splice(idx + 1, 0, p)
     set({ doc: touchDoc({ ...get().doc, paragraphs: paras }), activeParaId: p.id })
     scheduleAutoSave(get, set)
@@ -299,11 +343,35 @@ export const useStore = create<DocState>((set, get) => ({
     }
   },
 
-  async polish(id: string, mode, force = false) {
-    await runAi(id, mode, get, set, force)
+  async polish(id: string, mode, force = false, extra) {
+    await runAi(id, mode, get, set, force, extra)
+  },
+
+  async insertAuthorNote(id: string, text: string, directEnglish = false) {
+    const clean = text.trim()
+    if (!clean) return
+    const para = get().doc.paragraphs.find((p) => p.id === id)
+    if (!para || !para.en.trim()) {
+      set({ toast: { kind: 'info', text: '请先生成本段英文，再注入作者补充信息' } })
+      return
+    }
+    if (directEnglish) {
+      const merged = `${para.en.trimEnd()} ${clean}`
+      set({
+        doc: touchDoc({
+          ...get().doc,
+          paragraphs: get().doc.paragraphs.map((p) => (p.id === id ? { ...p, enPending: merged, error: null } : p)),
+        }),
+        toast: { kind: 'info', text: '已将作者英文补充放入新版本缓冲，请比较后确认' },
+      })
+      scheduleAutoSave(get, set)
+      return
+    }
+    await runAi(id, 'authorInsert', get, set, false, { authorNote: clean })
   },
 
   cancel(id: string) {
+    canceledIds.add(id)
     const rid = reqIds.get(id)
     if (rid) cancelAi(rid)
     // 直接释放等待点,防止 Rust 侧终态事件缺失导致批量翻译卡住
@@ -415,6 +483,60 @@ export const useStore = create<DocState>((set, get) => ({
     }
   },
 
+  openReview(open) {
+    set({ reviewOpen: open })
+  },
+
+  clearSectionCompressPreview() {
+    set({ compressPreview: null })
+  },
+
+  async generateSectionCompressPreview(scene: Scene) {
+    const { doc, config } = get()
+    const provider = resolveProvider(config, 'compress', true)
+    if (!provider) {
+      set({ settingsOpen: true, toast: { kind: 'error', text: '请先在设置中配置 API 服务' } })
+      return
+    }
+    const paras = doc.paragraphs.filter((p) => p.scene === scene && p.en.trim())
+    if (!paras.length) {
+      set({ toast: { kind: 'info', text: '该章节暂无已生成英文段落' } })
+      return
+    }
+    const combinedEn = paras.map((p) => p.en.trim()).join('\n\n')
+    const profile = doc.profile ?? config.paperProfile ?? 'nature-omics'
+    const messages = buildMessages({
+      mode: 'compress',
+      scene,
+      profile,
+      quality: 'high',
+      en: combinedEn,
+      customPrompt: config.customPrompt,
+    })
+
+    const requestId = `req-sec-${nanoid()}`
+    set({ compressPreview: { scene, text: '', loading: true } })
+    let acc = ''
+    streamChat(
+      requestId,
+      { providerId: provider.id, baseUrl: provider.baseUrl, model: provider.model, temperature: provider.temperature },
+      messages,
+      {
+        onChunk(delta) {
+          acc += delta
+          set({ compressPreview: { scene, text: acc, loading: true } })
+        },
+        onDone(cancelled) {
+          const clean = sanitizeModelOutput(acc)
+          set({ compressPreview: cancelled ? null : { scene, text: clean, loading: false } })
+        },
+        onError(message) {
+          set({ compressPreview: { scene, text: acc, loading: false, error: message } })
+        },
+      },
+    )
+  },
+
   showToast(kind, text) {
     set({ toast: { kind, text } })
   },
@@ -428,6 +550,8 @@ const reqIds = new Map<string, string>()
 const reqCompleters = new Map<string, () => void>()
 /** 重译/润色的流式暂存(不进主渲染流) */
 const pendStream = new Map<string, string>()
+/** 用户点击停止后登记，阻止两遍式 Pass 1 -> Pass 2 继续触发 */
+const canceledIds = new Set<string>()
 const autoTimers = new Map<string, ReturnType<typeof setTimeout>>()
 
 function scheduleAutoTranslate(id: string, get: () => DocState, set: (p: Partial<DocState>) => void) {
@@ -447,8 +571,16 @@ function scheduleAutoTranslate(id: string, get: () => DocState, set: (p: Partial
   )
 }
 
-function activeProvider(config: AppConfig) {
+function activeProvider(config: AppConfig): ProviderConfig | null {
   return config.providers.find((p) => p.id === config.activeProviderId) ?? null
+}
+
+function resolveProvider(config: AppConfig, mode: AiMode, isReworkPass = false): ProviderConfig | null {
+  const targetId =
+    mode !== 'translate' || isReworkPass
+      ? config.polishProviderId || config.activeProviderId
+      : config.activeProviderId
+  return config.providers.find((p) => p.id === targetId) ?? activeProvider(config)
 }
 
 function omit<T extends Record<string, unknown>>(o: T, k: string): T {
@@ -468,10 +600,68 @@ async function askSavePath(defaultName: string): Promise<string | null> {
 
 type RunKind = AiMode
 
+interface SinglePassResult {
+  cancelled: boolean
+  text: string
+  error?: string
+}
+
+function runSinglePass(
+  id: string,
+  provider: ProviderConfig,
+  messages: ReturnType<typeof buildMessages>,
+  streamToMain: boolean,
+  get: () => DocState,
+  set: (p: Partial<DocState>) => void,
+): Promise<SinglePassResult> {
+  const requestId = `req-${nanoid()}`
+  reqIds.set(id, requestId)
+  pendStream.delete(id)
+
+  return new Promise<SinglePassResult>((resolve) => {
+    let settled = false
+    const finish = (res: SinglePassResult) => {
+      if (settled) return
+      settled = true
+      reqIds.delete(id)
+      reqCompleters.delete(id)
+      pendStream.delete(id)
+      resolve(res)
+    }
+
+    reqCompleters.set(id, () => finish({ cancelled: true, text: '' }))
+
+    streamChat(
+      requestId,
+      { providerId: provider.id, baseUrl: provider.baseUrl, model: provider.model, temperature: provider.temperature },
+      messages,
+      {
+        onChunk(delta) {
+          if (streamToMain) {
+            const cur = get().streamingEn[id] ?? ''
+            set({ streamingEn: { ...get().streamingEn, [id]: cur + delta } })
+          } else {
+            pendStream.set(id, (pendStream.get(id) || '') + delta)
+          }
+        },
+        onDone(cancelled) {
+          const raw = streamToMain ? get().streamingEn[id] || '' : pendStream.get(id) || ''
+          const text = sanitizeModelOutput(raw)
+          finish({ cancelled: cancelled || canceledIds.has(id), text })
+        },
+        onError(message) {
+          finish({ cancelled: false, text: '', error: message })
+        },
+      },
+    )
+  })
+}
+
 /**
  * AI 执行核心:
  * - 首次翻译:结果直接写入 en(同时记录 enSourceZh 快照)
- * - 已有译文(重译/润色等):结果进 enPending 缓冲,由用户「替换 / 丢弃」
+ * - 已有译文(重译/润色/精缩/回炉/注入):结果进 enPending 缓冲,由用户「替换 / 丢弃」
+ * - 当 translateQuality === 'two-pass' 时，翻译完成后自动执行本地体检并在存在红牌时调用润色模型纯减法回炉
  * - 失败:置 failedIds,不清空任何已编辑文本
  */
 async function runAi(
@@ -480,9 +670,10 @@ async function runAi(
   get: () => DocState,
   set: (p: Partial<DocState>) => void,
   force: boolean,
+  extra?: RunExtraOpts,
 ) {
   const { doc, config } = get()
-  const provider = activeProvider(config)
+  const provider = resolveProvider(config, mode, false)
   if (!provider) {
     set({ settingsOpen: true, toast: { kind: 'error', text: '请先在设置中配置 API 服务' } })
     return
@@ -499,31 +690,45 @@ async function runAi(
     return
   }
 
+  canceledIds.delete(id)
   const hasEn = para.en.trim().length > 0
-  // 无英文 → 直接写入;已有英文且未被人工编辑 → 用户显式重译时可直写,否则缓冲;
+  // 无英文 → 直接写入;已有英文且未被人工编辑 → 用户显式强制重译时可直写,否则一律缓冲;
   // 已被人工编辑的英文 → 一律进缓冲,绝不自动覆盖
   const intoPending = hasEn && (para.enEdited || !force)
 
   const glossary = pickGlossary(para.zh, parseGlossaryText(config.glossaryText))
   const idx = doc.paragraphs.findIndex((p) => p.id === id)
   const prev = idx > 0 ? doc.paragraphs[idx - 1] : null
+  const coord = buildSectionCoordContext(doc.paragraphs, idx)
+  const profile = doc.profile ?? config.paperProfile ?? 'nature-omics'
+  const quality = config.translateQuality ?? 'high'
+
+  // 手动按 checklist 回炉时自动采集当前段落的全部硬性问题
+  let reworkFlags = extra?.reworkFlags
+  let fidelityIssues = extra?.fidelityIssues
+  if (mode === 'rework' && !reworkFlags && !fidelityIssues) {
+    const st = analyzeParagraphStyle(para.en, para.scene)
+    const zf = auditZhToEnFidelity(para.zh, para.en)
+    reworkFlags = st.flags.filter((f) => f.severity === 'rework' || f.severity === 'warn')
+    fidelityIssues = zf.issues
+  }
+
   const messages = buildMessages({
     mode,
     scene: para.scene,
+    profile,
+    quality,
     zh: para.zh,
     en: para.en,
     prevZh: prev ? boundText(prev.zh, 400) : undefined,
     prevEn: prev ? boundText(prev.en, 600) : undefined,
+    coord,
     glossary,
     customPrompt: config.customPrompt,
+    reworkFlags,
+    fidelityIssues,
+    authorNote: extra?.authorNote,
   })
-
-  const requestId = `req-${nanoid()}`
-  reqIds.set(id, requestId)
-  // 等待点:onDone/onError 释放,使批量翻译可串行
-  let release!: () => void
-  const gate = new Promise<void>((r) => { release = r })
-  reqCompleters.set(id, release)
 
   set({
     translatingIds: { ...get().translatingIds, [id]: true },
@@ -535,80 +740,129 @@ async function runAi(
     }),
   })
 
-  streamChat(
-    requestId,
-    { providerId: provider.id, baseUrl: provider.baseUrl, model: provider.model, temperature: provider.temperature },
-    messages,
-    {
-      onChunk(delta) {
-        if (intoPending) {
-          // 流式阶段暂存缓冲,完成后整体进入 enPending 供比较
-          pendStream.set(id, (pendStream.get(id) || '') + delta)
-        } else {
-          const cur = get().streamingEn[id] ?? ''
-          set({ streamingEn: { ...get().streamingEn, [id]: cur + delta } })
-        }
-      },
-      onDone(cancelled) {
-        reqIds.delete(id)
-        reqCompleters.delete(id)
-        release()
-        const raw = intoPending ? pendStream.get(id) || '' : get().streamingEn[id] || ''
-        pendStream.delete(id)
-        const text = sanitizeModelOutput(raw)
-        set({ translatingIds: omit(get().translatingIds, id), streamingEn: omit(get().streamingEn, id) })
-        if (cancelled) return
-        if (!text) {
-          set({ failedIds: { ...get().failedIds, [id]: true }, toast: { kind: 'error', text: '模型返回了空结果,可重试' } })
-          return
-        }
-        if (intoPending) {
-          set({
-            doc: touchDoc({
-              ...get().doc,
-              paragraphs: get().doc.paragraphs.map((p) => (p.id === id ? { ...p, enPending: text, error: null } : p)),
-            }),
-            toast: { kind: 'info', text: '已生成新版本,请比较后选择替换或保留' },
-          })
-          scheduleAutoSave(get, set)
-        } else {
-          set({
-            doc: touchDoc({
-              ...get().doc,
-              paragraphs: get().doc.paragraphs.map((p) =>
-                p.id === id ? { ...p, en: text, enSourceZh: p.zh, enEdited: false, enPending: null, error: null } : p,
-              ),
-            }),
-          })
-          scheduleAutoSave(get, set)
-        }
-      },
-      onError(message) {
-        reqIds.delete(id)
-        reqCompleters.delete(id)
-        release()
-        pendStream.delete(id)
-        // 失败只标记状态,不清空中文与旧英文
-        set({
-          translatingIds: omit(get().translatingIds, id),
-          streamingEn: omit(get().streamingEn, id),
-          failedIds: { ...get().failedIds, [id]: true },
-          doc: touchDoc({
-            ...get().doc,
-            paragraphs: get().doc.paragraphs.map((p) => (p.id === id ? { ...p, error: message } : p)),
-          }),
-          toast: { kind: 'error', text: `生成失败:${message}` },
-        })
-      },
-    },
-  )
+  const pass1 = await runSinglePass(id, provider, messages, !intoPending, get, set)
 
-  await gate
+  if (pass1.error) {
+    set({
+      translatingIds: omit(get().translatingIds, id),
+      streamingEn: omit(get().streamingEn, id),
+      failedIds: { ...get().failedIds, [id]: true },
+      doc: touchDoc({
+        ...get().doc,
+        paragraphs: get().doc.paragraphs.map((p) => (p.id === id ? { ...p, error: pass1.error ?? '生成失败' } : p)),
+      }),
+      toast: { kind: 'error', text: `生成失败:${pass1.error}` },
+    })
+    return
+  }
+
+  if (pass1.cancelled || canceledIds.has(id)) {
+    canceledIds.delete(id)
+    set({ translatingIds: omit(get().translatingIds, id), streamingEn: omit(get().streamingEn, id) })
+    return
+  }
+
+  if (!pass1.text) {
+    set({
+      translatingIds: omit(get().translatingIds, id),
+      streamingEn: omit(get().streamingEn, id),
+      failedIds: { ...get().failedIds, [id]: true },
+      toast: { kind: 'error', text: '模型返回了空结果,可重试' },
+    })
+    return
+  }
+
+  let finalText = pass1.text
+  let didAutoRework = false
+
+  // 双遍闭环精译：Pass 1 完成后本地毫秒体检；发现红牌或遗漏强数值则触发 Pass 2 纯减法回炉
+  if (mode === 'translate' && quality === 'two-pass') {
+    const zhCheck = auditZhToEnFidelity(para.zh, pass1.text)
+    const styleCheck = analyzeParagraphStyle(pass1.text, para.scene)
+    const hardStyleFlags = styleCheck.flags.filter((f) => f.severity === 'rework')
+
+    if (!zhCheck.ok || hardStyleFlags.length > 0) {
+      const reworkProvider = resolveProvider(config, 'rework', true) ?? provider
+      set({ toast: { kind: 'info', text: '检测到可优化 AI 表达或数值差异，正在自动执行纯减法回炉...' } })
+      const pass2Messages = buildMessages({
+        mode: 'rework',
+        scene: para.scene,
+        profile,
+        quality: 'high',
+        zh: para.zh,
+        en: pass1.text,
+        coord,
+        glossary,
+        customPrompt: config.customPrompt,
+        reworkFlags: hardStyleFlags,
+        fidelityIssues: zhCheck.issues,
+      })
+      const pass2 = await runSinglePass(id, reworkProvider, pass2Messages, false, get, set)
+      if (pass2.cancelled || canceledIds.has(id)) {
+        canceledIds.delete(id)
+        set({ translatingIds: omit(get().translatingIds, id), streamingEn: omit(get().streamingEn, id) })
+        return
+      }
+      if (!pass2.error && pass2.text) {
+        const diffGate = auditEnglishPolish(pass1.text, pass2.text)
+        const zhAfter = auditZhToEnFidelity(para.zh, pass2.text)
+        if (diffGate.ok || (zhCheck.issues.length > 0 && zhAfter.ok)) {
+          finalText = pass2.text
+          didAutoRework = true
+        }
+      }
+    }
+  }
+
+  set({ translatingIds: omit(get().translatingIds, id), streamingEn: omit(get().streamingEn, id) })
+
+  // 最终提示文本：区分保真告警与普通完成提示
+  let statusToast: DocState['toast'] = null
+  if (mode === 'translate') {
+    const finalZhCheck = auditZhToEnFidelity(para.zh, finalText)
+    if (!finalZhCheck.ok) {
+      statusToast = {
+        kind: 'info',
+        text: `${didAutoRework ? '已完成两遍精译，' : ''}本地校验发现：${finalZhCheck.issues.map((i) => i.label).join('、')}`,
+      }
+    } else if (intoPending) {
+      statusToast = { kind: 'info', text: didAutoRework ? '已完成闭环精译，请比较后选择替换或保留' : '已生成新版本,请比较后选择替换或保留' }
+    } else if (didAutoRework) {
+      statusToast = { kind: 'success', text: '已完成译后自动纯减法回炉并通过保真校验' }
+    }
+  } else {
+    const enDiff = auditEnglishPolish(para.en, finalText)
+    statusToast = enDiff.ok
+      ? { kind: 'info', text: '已生成润色候选并完成数值/引用保真门禁，请比较后替换' }
+      : { kind: 'info', text: `新版本已生成，保真门禁提醒：${enDiff.hardFlags.map((f) => f.label).join('、')}` }
+  }
+
+  if (intoPending) {
+    set({
+      doc: touchDoc({
+        ...get().doc,
+        paragraphs: get().doc.paragraphs.map((p) => (p.id === id ? { ...p, enPending: finalText, error: null } : p)),
+      }),
+      ...(statusToast ? { toast: statusToast } : {}),
+    })
+    scheduleAutoSave(get, set)
+  } else {
+    set({
+      doc: touchDoc({
+        ...get().doc,
+        paragraphs: get().doc.paragraphs.map((p) =>
+          p.id === id ? { ...p, en: finalText, enSourceZh: p.zh, enEdited: false, enPending: null, error: null } : p,
+        ),
+      }),
+      ...(statusToast ? { toast: statusToast } : {}),
+    })
+    scheduleAutoSave(get, set)
+  }
 }
 
-export { activeProvider }
+export { activeProvider, resolveProvider }
 
-// 仅开发构建暴露 store 供自动化调试/测试(生产分支被静态消除)
-if (import.meta.env.DEV) {
+// 仅开发构建暴露 store 供自动化调试/测试(Vitest Node 环境无 window 时跳过)
+if (import.meta.env.DEV && typeof window !== 'undefined') {
   ;(window as unknown as { __abw: unknown }).__abw = { store: useStore }
 }

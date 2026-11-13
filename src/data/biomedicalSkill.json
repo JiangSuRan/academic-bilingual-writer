@@ -1,0 +1,3855 @@
+{
+  "version": "2.3.0",
+  "sourceSkill": "biomedical-polish",
+  "generatedAt": "2026-11-13",
+  "aiExempt": [
+    "robust",
+    "landscape",
+    "comprehensive",
+    "associated with",
+    "furthermore",
+    "moreover",
+    "notably",
+    "importantly",
+    "interestingly",
+    "overall",
+    "collectively",
+    "taken together"
+  ],
+  "aiLexicon": [
+    {
+      "term": "crucially",
+      "cnsPerMillion": 8.3,
+      "tier": "strict"
+    },
+    {
+      "term": "delve",
+      "cnsPerMillion": 1.66,
+      "tier": "strict"
+    },
+    {
+      "term": "delve into",
+      "cnsPerMillion": 1.5,
+      "tier": "strict"
+    },
+    {
+      "term": "foster",
+      "cnsPerMillion": 2.14,
+      "tier": "strict"
+    },
+    {
+      "term": "fostering",
+      "cnsPerMillion": 1.66,
+      "tier": "strict"
+    },
+    {
+      "term": "game changer",
+      "cnsPerMillion": 1.5,
+      "tier": "strict"
+    },
+    {
+      "term": "harness",
+      "cnsPerMillion": 4.98,
+      "tier": "strict"
+    },
+    {
+      "term": "harnessing",
+      "cnsPerMillion": 3.32,
+      "tier": "strict"
+    },
+    {
+      "term": "illuminating",
+      "cnsPerMillion": 0.71,
+      "tier": "strict"
+    },
+    {
+      "term": "multifaceted",
+      "cnsPerMillion": 6.41,
+      "tier": "strict"
+    },
+    {
+      "term": "navigate",
+      "cnsPerMillion": 3.8,
+      "tier": "strict"
+    },
+    {
+      "term": "navigating",
+      "cnsPerMillion": 1.66,
+      "tier": "strict"
+    },
+    {
+      "term": "pivotal role",
+      "cnsPerMillion": 8.3,
+      "tier": "strict"
+    },
+    {
+      "term": "play a crucial role",
+      "cnsPerMillion": 1.5,
+      "tier": "strict"
+    },
+    {
+      "term": "play a pivotal role",
+      "cnsPerMillion": 1.5,
+      "tier": "strict"
+    },
+    {
+      "term": "realm",
+      "cnsPerMillion": 1.19,
+      "tier": "strict"
+    },
+    {
+      "term": "shed light",
+      "cnsPerMillion": 6.17,
+      "tier": "strict"
+    },
+    {
+      "term": "shed light on",
+      "cnsPerMillion": 1.5,
+      "tier": "strict"
+    },
+    {
+      "term": "shedding light",
+      "cnsPerMillion": 1.19,
+      "tier": "strict"
+    },
+    {
+      "term": "shedding light on",
+      "cnsPerMillion": 1.5,
+      "tier": "strict"
+    },
+    {
+      "term": "testament",
+      "cnsPerMillion": 0.24,
+      "tier": "strict"
+    },
+    {
+      "term": "unveiling",
+      "cnsPerMillion": 0.71,
+      "tier": "strict"
+    },
+    {
+      "term": "analytical",
+      "cnsPerMillion": 32.5,
+      "tier": "cluster"
+    },
+    {
+      "term": "biologically plausible",
+      "cnsPerMillion": 15,
+      "tier": "cluster"
+    },
+    {
+      "term": "cd and cd",
+      "cnsPerMillion": 84.46,
+      "tier": "cluster"
+    },
+    {
+      "term": "consistently",
+      "cnsPerMillion": 141.88,
+      "tier": "cluster"
+    },
+    {
+      "term": "contingent upon",
+      "cnsPerMillion": 15,
+      "tier": "cluster"
+    },
+    {
+      "term": "crucial role",
+      "cnsPerMillion": 14.47,
+      "tier": "cluster"
+    },
+    {
+      "term": "decoding",
+      "cnsPerMillion": 13.76,
+      "tier": "cluster"
+    },
+    {
+      "term": "did not achieve statistical significance",
+      "cnsPerMillion": 15,
+      "tier": "cluster"
+    },
+    {
+      "term": "encompassing",
+      "cnsPerMillion": 23.49,
+      "tier": "cluster"
+    },
+    {
+      "term": "further investigation",
+      "cnsPerMillion": 63.34,
+      "tier": "cluster"
+    },
+    {
+      "term": "further validation",
+      "cnsPerMillion": 21.11,
+      "tier": "cluster"
+    },
+    {
+      "term": "growing",
+      "cnsPerMillion": 27.52,
+      "tier": "cluster"
+    },
+    {
+      "term": "implicated in",
+      "cnsPerMillion": 84.46,
+      "tier": "cluster"
+    },
+    {
+      "term": "in summary",
+      "cnsPerMillion": 44.84,
+      "tier": "cluster"
+    },
+    {
+      "term": "increasingly",
+      "cnsPerMillion": 18.74,
+      "tier": "cluster"
+    },
+    {
+      "term": "interplay",
+      "cnsPerMillion": 16.85,
+      "tier": "cluster"
+    },
+    {
+      "term": "interpretation of",
+      "cnsPerMillion": 21.11,
+      "tier": "cluster"
+    },
+    {
+      "term": "intricate",
+      "cnsPerMillion": 16.37,
+      "tier": "cluster"
+    },
+    {
+      "term": "intricate interplay",
+      "cnsPerMillion": 15,
+      "tier": "cluster"
+    },
+    {
+      "term": "investigations",
+      "cnsPerMillion": 15.9,
+      "tier": "cluster"
+    },
+    {
+      "term": "leverage",
+      "cnsPerMillion": 36.06,
+      "tier": "cluster"
+    },
+    {
+      "term": "leveraging",
+      "cnsPerMillion": 49.82,
+      "tier": "cluster"
+    },
+    {
+      "term": "may contribute",
+      "cnsPerMillion": 42.23,
+      "tier": "cluster"
+    },
+    {
+      "term": "may contribute to",
+      "cnsPerMillion": 42.23,
+      "tier": "cluster"
+    },
+    {
+      "term": "may reflect",
+      "cnsPerMillion": 81.7,
+      "tier": "cluster"
+    },
+    {
+      "term": "modulate",
+      "cnsPerMillion": 27.52,
+      "tier": "cluster"
+    },
+    {
+      "term": "myriad",
+      "cnsPerMillion": 15,
+      "tier": "cluster"
+    },
+    {
+      "term": "no significant",
+      "cnsPerMillion": 91.73,
+      "tier": "cluster"
+    },
+    {
+      "term": "no significant difference",
+      "cnsPerMillion": 21.11,
+      "tier": "cluster"
+    },
+    {
+      "term": "pivotal",
+      "cnsPerMillion": 20.4,
+      "tier": "cluster"
+    },
+    {
+      "term": "remains a",
+      "cnsPerMillion": 63.34,
+      "tier": "cluster"
+    },
+    {
+      "term": "should not be interpreted as",
+      "cnsPerMillion": 15,
+      "tier": "cluster"
+    },
+    {
+      "term": "systematically",
+      "cnsPerMillion": 51.01,
+      "tier": "cluster"
+    },
+    {
+      "term": "the co",
+      "cnsPerMillion": 63.34,
+      "tier": "cluster"
+    },
+    {
+      "term": "the context of",
+      "cnsPerMillion": 84.46,
+      "tier": "cluster"
+    },
+    {
+      "term": "the present study",
+      "cnsPerMillion": 21.11,
+      "tier": "cluster"
+    },
+    {
+      "term": "these observations",
+      "cnsPerMillion": 63.34,
+      "tier": "cluster"
+    },
+    {
+      "term": "underscore",
+      "cnsPerMillion": 17.56,
+      "tier": "cluster"
+    },
+    {
+      "term": "underscores",
+      "cnsPerMillion": 15.66,
+      "tier": "cluster"
+    },
+    {
+      "term": "underscoring",
+      "cnsPerMillion": 21.59,
+      "tier": "cluster"
+    },
+    {
+      "term": "warrant",
+      "cnsPerMillion": 81.7,
+      "tier": "cluster"
+    },
+    {
+      "term": "warrants",
+      "cnsPerMillion": 42.23,
+      "tier": "cluster"
+    }
+  ],
+  "humanSentlen": {
+    "abstract": {
+      "nSents": 368,
+      "p10": 12,
+      "p50": 21,
+      "p90": 34
+    },
+    "introduction": {
+      "nSents": 356,
+      "p10": 12,
+      "p50": 23,
+      "p90": 40
+    },
+    "results": {
+      "nSents": 429,
+      "p10": 11,
+      "p50": 24,
+      "p90": 43
+    },
+    "discussion": {
+      "nSents": 458,
+      "p10": 13,
+      "p50": 25,
+      "p90": 41.3
+    },
+    "methods": {
+      "nSents": 138,
+      "p10": 8,
+      "p50": 17.5,
+      "p90": 41
+    },
+    "figure_legends": {
+      "nSents": 196,
+      "p10": 5,
+      "p50": 15,
+      "p90": 34
+    }
+  },
+  "humanSubstitutes": [
+    {
+      "target": "delve into",
+      "substitutes": [
+        {
+          "text": "we analyzed",
+          "count": 557,
+          "nPapers": 304
+        },
+        {
+          "text": "we examined",
+          "count": 487,
+          "nPapers": 284
+        },
+        {
+          "text": "we investigated",
+          "count": 412,
+          "nPapers": 251
+        },
+        {
+          "text": "investigated whether",
+          "count": 155,
+          "nPapers": 117
+        },
+        {
+          "text": "we quantified",
+          "count": 146,
+          "nPapers": 101
+        }
+      ]
+    },
+    {
+      "target": "pivotal / crucial role",
+      "substitutes": [
+        {
+          "text": "a key driver",
+          "count": 26,
+          "nPapers": 21
+        },
+        {
+          "text": "a key regulator",
+          "count": 24,
+          "nPapers": 22
+        },
+        {
+          "text": "plays a key role",
+          "count": 19,
+          "nPapers": 18
+        },
+        {
+          "text": "play a key role",
+          "count": 19,
+          "nPapers": 19
+        },
+        {
+          "text": "a major driver",
+          "count": 17,
+          "nPapers": 15
+        }
+      ]
+    },
+    {
+      "target": "multifaceted",
+      "substitutes": [
+        {
+          "text": "complex",
+          "count": 1862,
+          "nPapers": 564
+        },
+        {
+          "text": "heterogeneous",
+          "count": 713,
+          "nPapers": 271
+        },
+        {
+          "text": "context-dependent",
+          "count": 85,
+          "nPapers": 49
+        }
+      ]
+    },
+    {
+      "target": "intricate interplay",
+      "substitutes": [
+        {
+          "text": "interactions between",
+          "count": 362,
+          "nPapers": 170
+        },
+        {
+          "text": "interaction between",
+          "count": 248,
+          "nPapers": 149
+        },
+        {
+          "text": "interplay between",
+          "count": 64,
+          "nPapers": 59
+        },
+        {
+          "text": "crosstalk between",
+          "count": 51,
+          "nPapers": 39
+        },
+        {
+          "text": "reciprocal interactions",
+          "count": 3,
+          "nPapers": 2
+        }
+      ]
+    },
+    {
+      "target": "shed light on",
+      "substitutes": [
+        {
+          "text": "revealed the",
+          "count": 139,
+          "nPapers": 112
+        },
+        {
+          "text": "elucidate the",
+          "count": 123,
+          "nPapers": 94
+        },
+        {
+          "text": "reveals the",
+          "count": 54,
+          "nPapers": 44
+        },
+        {
+          "text": "revealing the",
+          "count": 47,
+          "nPapers": 45
+        },
+        {
+          "text": "elucidating the",
+          "count": 29,
+          "nPapers": 24
+        }
+      ]
+    },
+    {
+      "target": "leverage / leveraging",
+      "substitutes": [
+        {
+          "text": "used",
+          "count": 17895,
+          "nPapers": 831
+        },
+        {
+          "text": "applied",
+          "count": 3295,
+          "nPapers": 676
+        },
+        {
+          "text": "built on",
+          "count": 50,
+          "nPapers": 39
+        },
+        {
+          "text": "taking advantage of",
+          "count": 27,
+          "nPapers": 24
+        }
+      ]
+    },
+    {
+      "target": "harness / harnessing",
+      "substitutes": [
+        {
+          "text": "used",
+          "count": 17895,
+          "nPapers": 831
+        },
+        {
+          "text": "employed",
+          "count": 708,
+          "nPapers": 285
+        },
+        {
+          "text": "exploited",
+          "count": 76,
+          "nPapers": 57
+        }
+      ]
+    },
+    {
+      "target": "did not achieve statistical significance",
+      "substitutes": [
+        {
+          "text": "p > 0.05",
+          "count": 145,
+          "nPapers": 73
+        },
+        {
+          "text": "p = 0.05",
+          "count": 35,
+          "nPapers": 28
+        },
+        {
+          "text": "did not reach statistical significance",
+          "count": 30,
+          "nPapers": 28
+        },
+        {
+          "text": "was not statistically significant",
+          "count": 21,
+          "nPapers": 20
+        },
+        {
+          "text": "did not reach significance",
+          "count": 6,
+          "nPapers": 6
+        }
+      ]
+    },
+    {
+      "target": "offers a way to",
+      "substitutes": [
+        {
+          "text": "enables the",
+          "count": 129,
+          "nPapers": 104
+        },
+        {
+          "text": "enable the",
+          "count": 110,
+          "nPapers": 87
+        },
+        {
+          "text": "allows us to",
+          "count": 100,
+          "nPapers": 70
+        },
+        {
+          "text": "allow us to",
+          "count": 40,
+          "nPapers": 35
+        },
+        {
+          "text": "enables us",
+          "count": 37,
+          "nPapers": 26
+        }
+      ]
+    },
+    {
+      "target": "biologically plausible",
+      "substitutes": [
+        {
+          "text": "consistent with previous findings",
+          "count": 33,
+          "nPapers": 31
+        },
+        {
+          "text": "consistent with previous observations",
+          "count": 17,
+          "nPapers": 15
+        },
+        {
+          "text": "consistent with prior findings",
+          "count": 6,
+          "nPapers": 6
+        },
+        {
+          "text": "consistent with prior observations",
+          "count": 4,
+          "nPapers": 4
+        },
+        {
+          "text": "consistent with known biology",
+          "count": 3,
+          "nPapers": 3
+        }
+      ]
+    },
+    {
+      "target": "contingent upon",
+      "substitutes": [
+        {
+          "text": "determined by",
+          "count": 1143,
+          "nPapers": 448
+        },
+        {
+          "text": "dependent on",
+          "count": 305,
+          "nPapers": 190
+        },
+        {
+          "text": "depends on",
+          "count": 215,
+          "nPapers": 145
+        },
+        {
+          "text": "depend on",
+          "count": 143,
+          "nPapers": 109
+        }
+      ]
+    },
+    {
+      "target": "encompassing",
+      "substitutes": [
+        {
+          "text": "including",
+          "count": 6738,
+          "nPapers": 813
+        },
+        {
+          "text": "ranging from",
+          "count": 388,
+          "nPapers": 228
+        },
+        {
+          "text": "which includes",
+          "count": 94,
+          "nPapers": 80
+        },
+        {
+          "text": "which include",
+          "count": 51,
+          "nPapers": 46
+        }
+      ]
+    },
+    {
+      "target": "cannot establish",
+      "substitutes": [
+        {
+          "text": "cannot exclude",
+          "count": 35,
+          "nPapers": 30
+        },
+        {
+          "text": "cannot rule out",
+          "count": 29,
+          "nPapers": 27
+        },
+        {
+          "text": "cannot determine",
+          "count": 6,
+          "nPapers": 6
+        }
+      ]
+    },
+    {
+      "target": "does not imply",
+      "substitutes": [
+        {
+          "text": "does not mean",
+          "count": 3,
+          "nPapers": 3
+        }
+      ]
+    },
+    {
+      "target": "should not be interpreted as",
+      "substitutes": [
+        {
+          "text": "should be interpreted with caution",
+          "count": 21,
+          "nPapers": 19
+        }
+      ]
+    },
+    {
+      "target": "underscore(s)",
+      "substitutes": [
+        {
+          "text": "highlight",
+          "count": 624,
+          "nPapers": 346
+        },
+        {
+          "text": "highlights",
+          "count": 384,
+          "nPapers": 255
+        },
+        {
+          "text": "illustrate",
+          "count": 211,
+          "nPapers": 153
+        },
+        {
+          "text": "illustrates",
+          "count": 143,
+          "nPapers": 102
+        },
+        {
+          "text": "point to",
+          "count": 97,
+          "nPapers": 83
+        }
+      ]
+    },
+    {
+      "target": "testament to",
+      "substitutes": [
+        {
+          "text": "evidence of",
+          "count": 537,
+          "nPapers": 247
+        },
+        {
+          "text": "evidence for",
+          "count": 267,
+          "nPapers": 138
+        },
+        {
+          "text": "indication of",
+          "count": 35,
+          "nPapers": 32
+        },
+        {
+          "text": "indication for",
+          "count": 5,
+          "nPapers": 5
+        }
+      ]
+    },
+    {
+      "target": "myriad / game changer",
+      "substitutes": [
+        {
+          "text": "several",
+          "count": 2539,
+          "nPapers": 701
+        },
+        {
+          "text": "many",
+          "count": 1743,
+          "nPapers": 574
+        },
+        {
+          "text": "numerous",
+          "count": 321,
+          "nPapers": 216
+        }
+      ]
+    },
+    {
+      "target": "whereas (AI 偏好,z=3.1)",
+      "substitutes": [
+        {
+          "text": "while",
+          "count": 6025,
+          "nPapers": 753
+        },
+        {
+          "text": "in contrast",
+          "count": 1520,
+          "nPapers": 550
+        },
+        {
+          "text": "by contrast",
+          "count": 465,
+          "nPapers": 186
+        }
+      ]
+    },
+    {
+      "target": "together with (AI 偏好,z=3.4)",
+      "substitutes": [
+        {
+          "text": "along with",
+          "count": 733,
+          "nPapers": 384
+        },
+        {
+          "text": "combined with",
+          "count": 535,
+          "nPapers": 297
+        }
+      ]
+    },
+    {
+      "target": "yet (AI 偏好,z=3.6)",
+      "substitutes": [
+        {
+          "text": "but",
+          "count": 7168,
+          "nPapers": 822
+        },
+        {
+          "text": "however",
+          "count": 4869,
+          "nPapers": 811
+        },
+        {
+          "text": "although",
+          "count": 2788,
+          "nPapers": 718
+        }
+      ]
+    },
+    {
+      "target": "Collectively/Taken together 升华收尾",
+      "substitutes": [
+        {
+          "text": "hr.",
+          "count": 111,
+          "nPapers": 48
+        },
+        {
+          "text": "fdr.",
+          "count": 45,
+          "nPapers": 21
+        },
+        {
+          "text": "rhood.",
+          "count": 30,
+          "nPapers": 16
+        },
+        {
+          "text": "fdr).",
+          "count": 26,
+          "nPapers": 22
+        },
+        {
+          "text": "rhoods.",
+          "count": 26,
+          "nPapers": 15
+        }
+      ]
+    }
+  ],
+  "cnsTailBaseline": {
+    "naturePct": 1.62,
+    "cellPct": 1.68,
+    "clinicalPct": 1.71
+  },
+  "moves": [
+    {
+      "id": "cohort_enrollment",
+      "label": "队列入组",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "cohort enrollment"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "A total of <N> patients were enrolled and treated.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "We enrolled <N> patients with cancer into this study.",
+          "genre": "cell",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "These <N> patients were included for molecular characterization only.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "we analyzed",
+        "supplementary table",
+        "due to",
+        "in addition",
+        "we analysed"
+      ]
+    },
+    {
+      "id": "qc_batch_correction",
+      "label": "质控去批次",
+      "sections": [
+        "methods"
+      ],
+      "aliases": [
+        "qc batch correction"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.5,
+      "skeletons": [
+        {
+          "skeleton": "Harmony is a nonspatial batch correction method.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "R package Harmony was used to correct the batch effect of expression profiles.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "passive_measurement"
+        },
+        {
+          "skeleton": "Batch correction was performed during clustering using the Harmony algorithm as outlined above.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "due to",
+        "we applied",
+        "in accordance with",
+        "similar to",
+        "finally"
+      ]
+    },
+    {
+      "id": "feature_selection",
+      "label": "特征筛选",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "feature selection"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Finally, we measure the computation time of the feature selection methods.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Variable importance distributions were compared by laboratory feature (Fig. 1g).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The user can also select cells based on any meta data features, or using a lasso tool.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "we applied",
+        "we compared",
+        "specifically",
+        "(fig. 1a)",
+        "were associated"
+      ]
+    },
+    {
+      "id": "model_construction",
+      "label": "模型构建",
+      "sections": [
+        "methods"
+      ],
+      "aliases": [
+        "model construction"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "We developed logistic regression models for all effectiveness and safety outcomes.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "For the D-mode, we developed a deep learning model for quality detection to find the artifact.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "We implemented and evaluated two ML classifiers: (<N>) logistic regression and (<N>) random forest.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "next",
+        "first",
+        "second",
+        "specifically",
+        "indicated in"
+      ]
+    },
+    {
+      "id": "benchmarking",
+      "label": "基准评估",
+      "sections": [
+        "results",
+        "discussion"
+      ],
+      "aliases": [
+        "benchmarking"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Overall, the pseudobulk methods outperformed the mixed models.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Therefore, the algorithm containing <SYM> outperformed currently used biomarkers of liver fibrosis.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Performance was particularly high for prostate cancer, with a predictive <SYM> of <N> and a diagnostic <SYM> of <N>.",
+          "genre": "cell",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "we compared",
+        "compared to",
+        "compared with",
+        "showed that"
+      ]
+    },
+    {
+      "id": "ablation",
+      "label": "消融实验",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "ablation"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "To evaluate the contribution of each component of RNALoc-LM, we conducted an ablation study.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Evidence of interaction between antibiotic use and sex was detected for <N> species (q-value < <N> in the likelihood-ratio test comparing models with or without interaction terms; Supplementary Table <N>).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "passive_measurement"
+        },
+        {
+          "skeleton": "Removing these cases increased the <SYM> from <N> to <N> and the <SYM> and sensitivity to <N> (perfect score).",
+          "genre": "nature",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "(fig. 3d)",
+        "(fig. 3a)",
+        "(fig. 4c)",
+        "(fig. 6a)",
+        "(fig. 3e)"
+      ]
+    },
+    {
+      "id": "cross_dataset_generalization",
+      "label": "跨数据集泛化",
+      "sections": [
+        "results",
+        "discussion"
+      ],
+      "aliases": [
+        "cross dataset generalization"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "To test the generalization capacity of CellOT in such an out-of-sample (o.o.s.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Therefore, we investigated whether this observation is generalizable to other viruses.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Future testing on additional cohorts will be needed to verify the generalizability of the models.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "however",
+        "due to",
+        "furthermore",
+        "in addition"
+      ]
+    },
+    {
+      "id": "cross_cohort_replication",
+      "label": "跨队列复现",
+      "sections": [
+        "results",
+        "discussion",
+        "conclusion"
+      ],
+      "aliases": [
+        "cross cohort replication"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.4,
+      "skeletons": [
+        {
+          "skeleton": "Of the <N> associations, <N> had concordant directions of effect with ref.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The direction of the association in the replication cohort was consistent with the discovery cohort.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "The ovarian model was independently replicated at the National Cancer Institute (Figures <SYM> and <SYM>).",
+          "genre": "cell",
+          "section": "results",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "supplementary table",
+        "were consistent",
+        "was consistent",
+        "we found"
+      ]
+    },
+    {
+      "id": "discordance_explanation",
+      "label": "不一致解释",
+      "sections": [
+        "discussion",
+        "results"
+      ],
+      "aliases": [
+        "discordance explanation"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.4,
+      "skeletons": [
+        {
+          "skeleton": "This discrepancy is likely caused by tumor heterogeneity across different tumor models.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "In contrast to our previous <SYM>/<SYM> model, which studied the cancer-preventive effect of L.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Dental pulp and periodontal precursors display however divergent behaviors from very early developmental stages.",
+          "genre": "cell",
+          "section": "discussion",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "in contrast to",
+        "consistent with",
+        "however",
+        "revealed that",
+        "was observed"
+      ]
+    },
+    {
+      "id": "subpopulation_naming",
+      "label": "亚群命名",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "subpopulation naming"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.2,
+      "skeletons": [
+        {
+          "skeleton": "Thus, we named the cluster Polykeratin (PolyKRT) rather than pankeratin.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Warga et al. (<N>) have found <SYM> regulates intermediate mesoderm cell fate.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Thus, it is identified as atypical adenomatous hyperplasia cell state and denoted as $<SYM>$ .",
+          "genre": "nature",
+          "section": "results",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "we identified",
+        "additional file",
+        "suggesting that",
+        "in contrast"
+      ]
+    },
+    {
+      "id": "marker_definition",
+      "label": "标志物界定",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "marker definition"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.1,
+      "skeletons": [
+        {
+          "skeleton": "(D) Dot plot of marker genes for different cell types.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Several surface marker antibodies were used to label different liver cell types.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "<N>-1BB is well-known as a marker of T cell activation and has co-stimulatory activity for activated T cells39.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "we identified",
+        "supplementary table",
+        "we found",
+        "compared with"
+      ]
+    },
+    {
+      "id": "cnv_inference",
+      "label": "CNV 推断",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "cnv inference"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "To this end, we performed copy number variation (<SYM>) analysis.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Overall, at least one recurrent aneuploidy was observed in <N>% of cases.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "No driver somatic copy number alterations (SCNAs) associated with response.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "confirmed by",
+        "was confirmed",
+        "(figure s4a)",
+        "analysis showed",
+        "(figure 5a)"
+      ]
+    },
+    {
+      "id": "trajectory_pseudotime",
+      "label": "轨迹/拟时序",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "trajectory pseudotime"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Trajectory analysis was performed by package monocle3.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Pseudotime analysis was conducted with Monocle (v.<N>).",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Trajectory analyses were conducted using Monocle <N> and Moran’s I index.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "next",
+        "we identified",
+        "we observed",
+        "additional file"
+      ]
+    },
+    {
+      "id": "paired_pseudobulk",
+      "label": "配对 Pseudobulk",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "paired pseudobulk"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Only pseudobulks with at least ten cells were kept.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Single cell-data were aggregated into pseudobulk samples by biological replicates.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "We then performed differential expression analysis on these pseudobulk samples, with the design y ~ <N> + cluster.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "were observed",
+        "supported by",
+        "(fig. 4a)",
+        "(fig. 1)",
+        "(figure 3a)"
+      ]
+    },
+    {
+      "id": "differential_expression",
+      "label": "差异表达",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "differential expression"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.7,
+      "skeletons": [
+        {
+          "skeleton": "Among these genes, <N> were upregulated and <N> were downregulated.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Multiple RP genes were similarly downregulated in the rib (Figure 3J).",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The red dots denote upregulated and the green dots downregulated genes.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "compared with",
+        "consistent with",
+        "we found",
+        "compared to",
+        "supplementary table"
+      ]
+    },
+    {
+      "id": "pathway_enrichment",
+      "label": "通路富集",
+      "sections": [
+        "results",
+        "methods"
+      ],
+      "aliases": [
+        "pathway enrichment"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "(C) Bar plot showing GO terms enriched in neutrophil subtypes.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Cell cycle regulation is enriched for <N> genes in four GO terms.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "GO terms with corrected P less than <N> were considered significantly enriched in DEGs.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "were enriched",
+        "supplementary table",
+        "consistent with",
+        "revealed that",
+        "showed that"
+      ]
+    },
+    {
+      "id": "regulon_inference",
+      "label": "转录调控推断",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "tf_activity_inference",
+        "transcription_factor_activity",
+        "scenic_regulon"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.3,
+      "skeletons": [
+        {
+          "skeleton": "Due to limited annotation, <SYM>+ does not contain a Shox2 regulon.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Thereafter, mice were fed a diet containing dox to induce sgRNA expression.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "For detection of deletions or duplications in <SYM> and <SYM> genes we employed the <SYM> multiplex ligation-dependent probe amplification kit (<SYM>-Holland).",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "consistent with",
+        "next",
+        "compared with",
+        "finally"
+      ]
+    },
+    {
+      "id": "multiomics_integration",
+      "label": "多组学整合",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "multiomics integration"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "To achieve cross-modal inference in downstream tasks, we resort to aligning different modalities in the latent space.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "The weighted nearest neighbor (wnn) graph was determined with Seurat’s FindMultiModalNeighbors to represent a weighted combination of both modalities.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Although this discovery needs to be verified further, it demonstrates the multiomics integration capability of <SYM>.",
+          "genre": "nature",
+          "section": "results",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "(fig. 5a)",
+        "contributing to",
+        "(fig. 5b)",
+        "similar across",
+        "(figure 4d)"
+      ]
+    },
+    {
+      "id": "epigenetic_programs",
+      "label": "表观程序",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "epigenetic programs"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Together, our results show that a global increase in H3K27me3 is a common epigenetic signature of aging.",
+          "genre": "cell",
+          "section": "results",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "The serum <SYM> levels positively correlated with the epigenetic neural signature (P < <N>, R2 = <N>; Fig. 6e).",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "What are the transcriptional regulators underlying evolutionarily recent chromatin accessibility in diapause?",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "suggest that",
+        "suggesting that",
+        "we analyzed",
+        "we examined",
+        "taken together"
+      ]
+    },
+    {
+      "id": "virtual_perturbation",
+      "label": "虚拟扰动",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "virtual_knockout",
+        "in_silico_perturbation",
+        "in_silico_knockout",
+        "genki_perturbation"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.1,
+      "skeletons": [
+        {
+          "skeleton": "Thus, GenKI could be used to predict some of the DE genes.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "<SYM> learns functional gene perturbagen embeddings by integrating Gene Ontology (GO) priors with GNNs.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Specifically, high <SYM>-T cell infiltration predicted both response and improved OS (P = <N>, Fig. 5b).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "suggest that",
+        "furthermore",
+        "finally",
+        "we applied",
+        "(fig. 2d)"
+      ]
+    },
+    {
+      "id": "drug_response_prediction",
+      "label": "药敏预测",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "drug response prediction"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "<N>) to obtain cisplatin <SYM> values for the same cell lines.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "We next examined the association between <SYM>-seq peaks and drug sensitivity.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "We benchmarked these encoders on the large-scale sciPlex3 drug screening dataset23 (Figure <SYM>).",
+          "genre": "cell",
+          "section": "results",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "suggest that",
+        "we compared",
+        "therefore",
+        "similarly",
+        "inhibitory concentration"
+      ]
+    },
+    {
+      "id": "spatial_deconvolution",
+      "label": "空间去卷积",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "spatial deconvolution"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "DeepRD performs similarly to ring deconvolution, but is faster and less consistent.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "ST data were deconvoluted using the seeded <SYM> method implemented in SPOTlight v0.<N>.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "passive_measurement"
+        },
+        {
+          "skeleton": "Deconvolution of <SYM> sequencing data indicated no other significant associations between pathologic response and relative cell type compositions (Fig. 4f).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "compared to",
+        "we applied",
+        "due to",
+        "finally",
+        "we compared"
+      ]
+    },
+    {
+      "id": "spatial_colocalization",
+      "label": "空间共定位",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "spatial colocalization"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Spatial statistics reveal spatial associations between cell types.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Left, integrated multiplexed fluorescence images show spatial co-localization.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "We examined the spatial proximity between macrophages and CAFs in the <SYM> data set.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "we examined",
+        "confirmed that",
+        "we analyzed",
+        "suggested that",
+        "was consistent"
+      ]
+    },
+    {
+      "id": "cell_communication",
+      "label": "细胞通讯",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "cellchat_signaling",
+        "nichenet_signaling",
+        "intercellular_communication"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.7,
+      "skeletons": [
+        {
+          "skeleton": "(F) Cell-cell communication network in mouse liver.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "CellChat v2 is used to identify spatially proximal cell–cell communications.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Finally, we evaluated the immune cell contributions in cell−cell communication networks.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "revealed that",
+        "we found",
+        "supplementary table",
+        "additional file"
+      ]
+    },
+    {
+      "id": "ligand_receptor",
+      "label": "配体受体",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "ligand receptor"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Prognostic and spatial profiling of ligand–receptor interactions in thyroid cancer.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Within the top <N> ligand-receptor pairs, <SYM>-<SYM> axis displayed two unique properties.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Using the scRNA-seq data, we characterized the receptor–ligand networks present in the liver <SYM>.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "we found",
+        "we observed",
+        "additional file",
+        "we identified",
+        "we compared"
+      ]
+    },
+    {
+      "id": "niche_definition",
+      "label": "生态位界定",
+      "sections": [
+        "results",
+        "discussion"
+      ],
+      "aliases": [
+        "niche definition"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.3,
+      "skeletons": [
+        {
+          "skeleton": "Granulocytes present a permissive niche for M.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Examination of the BM niche in individuals with CH would thus be helpful.",
+          "genre": "cell",
+          "section": "discussion",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Importantly, as shown in <SYM>-<N>, radiographic assessment of response after neoadjuvant immunotherapy is grossly inaccurate8.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "we observed",
+        "suggest that",
+        "we identified",
+        "additional file"
+      ]
+    },
+    {
+      "id": "negative_control",
+      "label": "阴性对照",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "negative control"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "A scrambled variant (VIDAmut, <SYM>) served as a negative control.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Consider the negative control pair formed by coupling NT gRNA i to gene j.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Second, we used the negative control of paternal exposure design to compare the associations between offspring autism and both maternal and paternal diagnoses.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "we applied",
+        "by contrast",
+        "second",
+        "we tested",
+        "confirmed by"
+      ]
+    },
+    {
+      "id": "sensitivity_analysis",
+      "label": "灵敏度分析",
+      "sections": [
+        "results",
+        "methods"
+      ],
+      "aliases": [
+        "sensitivity analysis"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.6,
+      "skeletons": [
+        {
+          "skeleton": "Associations were robust to adjustment for tTMB and PD-L1 status (Table <N>).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Finally, we investigated whether cTWAS is robust to different simulation settings.",
+          "genre": "nature",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Findings were also consistent in sensitivity analyses excluding pediatric samples.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "finally",
+        "we applied",
+        "resulted in",
+        "second"
+      ]
+    },
+    {
+      "id": "sample_size_power",
+      "label": "样本量/统计单元",
+      "sections": [
+        "methods"
+      ],
+      "aliases": [
+        "sample size power"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.7,
+      "skeletons": [
+        {
+          "skeleton": "Second cohort, both <N> and Yumm1.<N> contained <N> animals per group.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "<SYM> requires a sample size parameter N to estimate <SYM> heritability.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The priority objective used to determine sample size was testing for an association between pretreatment ctDNA levels and OS.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "due to",
+        "similar to",
+        "indicated in",
+        "we applied",
+        "because of"
+      ]
+    },
+    {
+      "id": "statistical_reporting",
+      "label": "统计报告",
+      "sections": [
+        "methods"
+      ],
+      "aliases": [
+        "statistical reporting"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Omnibus <SYM>-adjusted P values were computed using fdr.cit.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Kaplan–Meier survival data were analyzed using two-sided log-rank test.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Term significance was corrected by Benjamini–Hochberg with <SYM> <<N>%.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "compared to",
+        "we applied",
+        "compared with",
+        "we compared",
+        "supplementary table"
+      ]
+    },
+    {
+      "id": "mechanism_interpretation",
+      "label": "机制解读",
+      "sections": [
+        "discussion",
+        "results",
+        "conclusion"
+      ],
+      "aliases": [
+        "mechanism interpretation"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Rather, our data suggest that LAMs are induced by local lipid exposure.",
+          "genre": "cell",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Thus, rs2242652 is not simply acting as a surrogate for telomere length.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Recent mechanistic insights provide a metabolic explanation for this resistance.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "suggest that",
+        "suggesting that",
+        "suggests that",
+        "we observed"
+      ]
+    },
+    {
+      "id": "clinical_translation",
+      "label": "临床转化",
+      "sections": [
+        "discussion",
+        "conclusion"
+      ],
+      "aliases": [
+        "clinical translation"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Arguably, the <N>-gene signature is not optimal for clinical translation.",
+          "genre": "cell",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Genetic studies have provided new insights to identify therapeutic targets.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Analysis of other exploratory biomarkers for patient stratification is ongoing.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "suggest that",
+        "suggests that",
+        "notably",
+        "thus",
+        "therefore"
+      ]
+    },
+    {
+      "id": "limitation_scoping",
+      "label": "局限界定",
+      "sections": [
+        "discussion",
+        "limitations",
+        "conclusion"
+      ],
+      "aliases": [
+        "disc_limitation_inline",
+        "study_limitations",
+        "limitations_roadmap"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "A second limitation is that our sample size is small.",
+          "genre": "cell",
+          "section": "limitations",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "One limitation we observed is the file format of the publications.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "A second limitation is the lack of an independent validation cohort.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "future studies",
+        "limitations of",
+        "future work",
+        "limitation of",
+        "several limitations"
+      ]
+    },
+    {
+      "id": "dataset_description",
+      "label": "数据集描述",
+      "sections": [
+        "results",
+        "abstract"
+      ],
+      "aliases": [
+        "dataset description"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "This dataset includes <N> M cells from <N> <SYM> files.",
+          "genre": "cell",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "The third dataset contains seven haplotypes of norovirus.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "We generated a library of <N> pancreatic ductal adenocarcinoma (<SYM>) organoid lines: five each from treatment-naïve and FOLFIRINOX-treated patients.",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "(fig. 1a)",
+        "(figure 1a)",
+        "(figure s1a)",
+        "(table s3)",
+        "(figure 2a)"
+      ]
+    },
+    {
+      "id": "data_availability",
+      "label": "数据可得性",
+      "sections": [
+        "methods"
+      ],
+      "aliases": [
+        "data availability"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Data were deposited at the <SYM> (GSE117529).",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Raw data have been deposited in <SYM> (GSE223859).",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The data are available at the <SYM> repository: GSE238264 (NCT03299946).",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "correspond to",
+        "supported by",
+        "data analyzed",
+        "showed a strong",
+        "in figure 6"
+      ]
+    },
+    {
+      "id": "figure_wayfinding",
+      "label": "图表指路",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "figure wayfinding"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Illustrative examples are shown in Figure <N>.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The overview of this study is shown in Fig. 1a.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "A representative case of mIHC is shown in Fig. 4A.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "compared to",
+        "compared with",
+        "consistent with",
+        "we found"
+      ]
+    },
+    {
+      "id": "consistency_check",
+      "label": "一致性陈述",
+      "sections": [
+        "results",
+        "discussion",
+        "conclusion"
+      ],
+      "aliases": [
+        "consistency check"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Consistent with these findings, complementation of rIL-<N> in the ΔplcA B.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Consistent with our observations, a previous study has discovered that in C.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Subgroup analyses of pCR rates were consistent with these results (Fig. <N>).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "consistent with",
+        "in line with",
+        "in agreement with",
+        "we observed",
+        "we found"
+      ]
+    },
+    {
+      "id": "wet_validation",
+      "label": "湿实验验证",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "wet validation"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "The KD efficiency was validated by western blotting, as shown in Fig. 1A.",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Chimeroids were cultured for <N> weeks before flow cytometry, scRNA-seq, and imaging.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Infiltrating immune cells were isolated from tumours and studied by flow cytometry in an independent experiment (figure 3F).",
+          "genre": "clinical",
+          "section": "results",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "showed that",
+        "consistent with",
+        "confirmed that",
+        "compared with",
+        "confirmed by"
+      ]
+    },
+    {
+      "id": "clonal_analysis",
+      "label": "克隆型分析",
+      "sections": [
+        "results"
+      ],
+      "aliases": [
+        "clonal analysis"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Clonal expansion index was calculated.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The phenotypes of Tex and Treg occupied a larger clonal expansion (Fig. 3e).",
+          "genre": "nature",
+          "section": "results",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Together, these data suggest a tumor-specific clonal expansion of IgG1 antibody-producing cells in <SYM> responders.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "compared with",
+        "consistent with",
+        "we observed",
+        "showed that",
+        "compared to"
+      ]
+    },
+    {
+      "id": "cell_annotation",
+      "label": "细胞注释",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "cell annotation"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "We used majority voting for cluster annotations within SingleR.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Using this new annotation we then calculated the DE genes and DE proteins for each cluster.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "<SYM> maintains a list of cell type marker genes for annotating in situ ST data.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "additional file",
+        "consistent with",
+        "we found",
+        "we applied"
+      ]
+    },
+    {
+      "id": "embedding_visualization",
+      "label": "嵌入可视化",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "embedding visualization"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.4,
+      "skeletons": [
+        {
+          "skeleton": "<SYM> embedding was done with the runUMAP function.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Ultimately, the pooled data is visualized in a heatmap.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "<SYM> embeddings and dot plots were generated using well-annotated scanpy functions.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "finally",
+        "additional file",
+        "showed that",
+        "shown in figure",
+        "next"
+      ]
+    },
+    {
+      "id": "abs_background_premise",
+      "label": "摘要背景前提",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "background_premise",
+        "abs_opening"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Immune system control is a principal hurdle in cancer evolution.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The liver is the most frequent metastatic site for colorectal cancer.",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Little is known about cellular heterogeneity as disease severity increases.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "caused by",
+        "remains challenging",
+        "remain unclear",
+        "remains unclear",
+        "at least in part"
+      ]
+    },
+    {
+      "id": "abs_knowledge_gap",
+      "label": "摘要知识缺口",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "background_gap",
+        "abstract_gap",
+        "abs_gap"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "However, the underlying mechanism remains largely unknown.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "However, the mechanisms of AR to <SYM> in <SYM> are largely unknown.",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "However, its impacts on diverse brain cell types remain poorly understood.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "however",
+        "remains unclear",
+        "due to",
+        "remain poorly",
+        "remains poorly"
+      ]
+    },
+    {
+      "id": "abs_here_we_design",
+      "label": "摘要 Here-we 设计",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "here_we_design",
+        "cohort_scale_inline",
+        "abs_design"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Here, we acquire <SYM> tissue samples from two large multi-centric studies.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Here we conducted an unbiased genome-wide <SYM> screen of primary macrophages.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Here, we searched for protein biomarkers in serum extracellular vesicles (EVs).",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "enhance the",
+        "enhances the",
+        "inhibiting the",
+        "suppressor protein",
+        "demonstrated its"
+      ]
+    },
+    {
+      "id": "abs_primary_finding",
+      "label": "摘要主要发现",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "abs_finding",
+        "primary_finding"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "We demonstrate that in ES, tumor hypoxia selectively exacerbates bone metastasis.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "We demonstrated that mCRC in the liver is characterized by transcriptional alterations of macrophages in the <SYM>.",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "We demonstrate that combined clinical-genomic models outperform clinical-only models in predicting IMs likely to transform to GC.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "we identified",
+        "we found",
+        "revealed that",
+        "showed that",
+        "we observed"
+      ]
+    },
+    {
+      "id": "abs_multimodal_convergence",
+      "label": "摘要多模态汇聚",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "multimodal_convergence"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.6,
+      "skeletons": [
+        {
+          "skeleton": "It represents a step towards bridging genomic code and human language through the integration of a multimodal <SYM>.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Here, we integrated single-cell profiling and spatial transcriptomics of glioma-associated microglia in the <SYM> model.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Integrating single-cell datasets produced by multiple omics technologies is essential for defining cellular heterogeneity.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "enhances the",
+        "enhanced tumor",
+        "(fig. 1a and b)"
+      ]
+    },
+    {
+      "id": "abs_model_performance",
+      "label": "摘要模型性能",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "abs_auc_hr"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Logistic bootstrap-based regression was used to measure the accuracy of predicting liver fibrosis.",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "passive_measurement"
+        },
+        {
+          "skeleton": "T cell InteractPrint was predictive of response in both trials versus PD-L1 (<SYM> = <N>, <N> vs. <N>, <N>).",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "<SYM> accurately predicted primary tumor origins, with a top-<N> accuracy of <N>% and top-<N> accuracy of <N>%.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "(fig. 1b)",
+        "independent validation cohort",
+        "achieved an",
+        "remain to be",
+        "results demonstrated"
+      ]
+    },
+    {
+      "id": "abs_bounded_conclusion",
+      "label": "摘要收束结论",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "bounded_conclusion",
+        "abs_conclusion"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Overall, this study reveals the molecular and cellular basis of stony coral biology.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Together, our findings shed light on metabolic reprogramming in the precancerous pancreas.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "These results support further studies on <SYM>-<N> as a therapeutic and diagnostic target for mCRPC.",
+          "genre": "clinical",
+          "section": "abstract",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "overall",
+        "collectively",
+        "suggest that",
+        "taken together",
+        "in summary"
+      ]
+    },
+    {
+      "id": "cell_highlights_in_brief",
+      "label": "Cell Highlights/In Brief",
+      "sections": [
+        "abstract"
+      ],
+      "aliases": [
+        "highlights_bullet",
+        "in_brief_summary"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Fate mapping revealed a prominent contribution of eMBCs to the <SYM> pool.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "For the comparisons, we compute P values using a two-sided independent t-test.",
+          "genre": "nature",
+          "section": "abstract",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "NK cells show reduced cytotoxicity and T cells have a dysfunctional profile.",
+          "genre": "cell",
+          "section": "abstract",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "we identified",
+        "revealed that",
+        "finally",
+        "furthermore",
+        "showed that"
+      ]
+    },
+    {
+      "id": "intro_disease_clinical_context",
+      "label": "引言疾病临床背景",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "disease_context",
+        "intro_opening"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Collagen is the most abundant component of the tumour <SYM>.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Lung cancer is one of the main leading causes of death by cancer worldwide.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Chronic rhinosinusitis (<SYM>) is a heterogeneous inflammatory disease of the nasal and sinonasal cavities.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "resulted in",
+        "in part",
+        "caused by",
+        "indeed",
+        "driven by"
+      ]
+    },
+    {
+      "id": "intro_therapeutic_bottleneck",
+      "label": "引言治疗瓶颈",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "therapeutic_bottleneck",
+        "clinical_need"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.6,
+      "skeletons": [
+        {
+          "skeleton": "Therefore, there remained huge unmet needs for patients with cHL.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Development of such NITs to regulatory standards remains a major unmet need for the field.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Pancreatic ductal adenocarcinoma (<SYM>) is a highly malignant tumor with a poor prognosis.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "due to",
+        "however",
+        "therefore",
+        "contribute to",
+        "additionally"
+      ]
+    },
+    {
+      "id": "intro_prior_work_synthesis",
+      "label": "引言已有工作综述",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "literature_synthesis",
+        "prior_work"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Recent studies have described the <SYM> dynamics in adult M.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "More recently, data from trials on investigational therapies have emerged.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Global transcriptomics studies have shown significant adipose tissue dysregulation in obesity and insulin resistance.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "demonstrated that",
+        "however",
+        "revealed that",
+        "suggesting that",
+        "in part"
+      ]
+    },
+    {
+      "id": "intro_pathway_molecular_axis",
+      "label": "引言通路分子轴",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "molecular_axis",
+        "pathway_context"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.3,
+      "skeletons": [
+        {
+          "skeleton": "Next, we investigated whether the <SYM>–<SYM> pathway regulates <SYM> expression.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Clinical data indicate that activation of such pathways is linked to patient outcomes.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "passive_measurement"
+        },
+        {
+          "skeleton": "Preclinical models suggested that sensitivity to <SYM> inhibitors was associated with activation of <SYM> and/or <SYM> deletions (<N>, <N>).",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "in part",
+        "mediated by",
+        "caused by",
+        "leads to",
+        "collectively"
+      ]
+    },
+    {
+      "id": "intro_controversy_duality",
+      "label": "引言争议二重性",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "dual_role",
+        "mechanistic_controversy"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.1,
+      "skeletons": [
+        {
+          "skeleton": "By contrast, labelled alcLip-<N> showed weak fluorescence (Extended Data Fig. 2b).",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "<N>), whereas the proportion of patients experiencing treatment benefit is relatively limited.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Animal studies suggest that the eye can serve as a site of replication for numerous respiratory infections.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "by contrast",
+        "on the other hand",
+        "due to",
+        "however",
+        "led to"
+      ]
+    },
+    {
+      "id": "intro_methodological_limitation",
+      "label": "引言方法学局限",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "bulk_limitation",
+        "method_bottleneck"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Single-cell sequencing methods also suffer from inherent inefficiencies.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Nevertheless, the analysis of single-cell <SYM> screening data is challenging.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "This is possibly related to the lack of single-cell granularity and spatial context in these studies and overlapping expression programmes in distinct tumour and immune cells.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "however",
+        "caused by",
+        "limitation of",
+        "on the other hand",
+        "in contrast to"
+      ]
+    },
+    {
+      "id": "intro_knowledge_gap_pivot",
+      "label": "引言缺口转折",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "intro_gap",
+        "gap_pivot"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Yet, the factors triggering <SYM> in ES remain unknown.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "However, it remains unknown how these alleles affect NFκB dynamics.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "The prognostic or predictive value of <SYM> mutations in residual disease after <SYM> is unknown.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "however",
+        "remains unclear",
+        "remains unknown",
+        "remains poorly",
+        "remain unclear"
+      ]
+    },
+    {
+      "id": "intro_rationale_hypothesis",
+      "label": "引言立论假设",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "study_rationale",
+        "hypothesis_statement"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "To test this, we treated male and female kidney tubules with exogenous 2OH-E2.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Recent work has attempted to address this fundamental challenge in different ways.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "We hypothesized that measuring AcTau174 could serve as a promising biomarker for <SYM>-Tau.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "caused by",
+        "leads to",
+        "contributes to",
+        "rely on",
+        "(extended data fig. 1)"
+      ]
+    },
+    {
+      "id": "intro_here_we_overview",
+      "label": "引言 Here-we 总览",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "intro_here_we",
+        "study_overview"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Here we report its prespecified primary and updated <SYM> and OS analyses.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Here, we use a <SYM>-lineage reporter mouse29 to test the <SYM> hypothesis.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Next we investigated how blockage of <SYM> reprograms the metabolism of CMs.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "we analyzed",
+        "finally",
+        "next",
+        "therefore",
+        "we analysed"
+      ]
+    },
+    {
+      "id": "intro_study_impact_closing",
+      "label": "引言影响收尾",
+      "sections": [
+        "introduction"
+      ],
+      "aliases": [
+        "intro_closing",
+        "contribution_summary"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.5,
+      "skeletons": [
+        {
+          "skeleton": "The comprehensive unified <SYM> will serve as a valuable resource for the community.",
+          "genre": "cell",
+          "section": "introduction",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Therefore, preventing the loss of HSCs could enable improved ex vivo <SYM> expansion.",
+          "genre": "nature",
+          "section": "introduction",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "These data highlight the importance of predictive markers in personalization of neoadjuvant therapies.",
+          "genre": "clinical",
+          "section": "introduction",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "future studies",
+        "collectively",
+        "promoting the",
+        "revealed highly"
+      ]
+    },
+    {
+      "id": "leg_title_declarative",
+      "label": "图注首句陈述",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "legend_title",
+        "figure_title"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.4,
+      "skeletons": [
+        {
+          "skeleton": "Fig. <N> | The effect of <SYM> and <SYM> T cell depletion on lung and spleen <SYM>.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Fig. <N> | Results of analytical validation of Ella and Simoa <SYM> assays in <SYM> and plasma.",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "In (B)–(D), <N> mice were analyzed per time point, except at <N> months, where <N> mice were analyzed.",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "source data",
+        "compared to",
+        "compared with",
+        "relative to",
+        "indicated by"
+      ]
+    },
+    {
+      "id": "leg_panel_umap_heatmap",
+      "label": "图注 UMAP/热图面板",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "panel_umap",
+        "panel_heatmap"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Scores are visualized as feature on the <SYM> embedding.",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "b, <SYM> visualization of <N> microglia colored by supercluster.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "(D) Heatmap visualising mean marker expression of detected cell types after channel normalisation and PhenoGraph clustering.",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "compared with",
+        "compared to",
+        "relative to",
+        "led to",
+        "indicated cell"
+      ]
+    },
+    {
+      "id": "leg_panel_volcano_enrichment",
+      "label": "图注火山/富集面板",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "panel_volcano",
+        "panel_gsea"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "<SYM> returned <N> GO terms with adjusted p values < <N>.",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "f, <SYM> showing the top <N> GO terms among all biological processes.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "C, Volcano plot showing the log10 of adjusted P value and log2 fold change of all genes studied.",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "compared with",
+        "compared to",
+        "relative to",
+        "similar to",
+        "correspond to"
+      ]
+    },
+    {
+      "id": "leg_panel_survival_roc",
+      "label": "图注生存/ROC 面板",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "panel_roc",
+        "panel_survival"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "The forest plots below each Kaplan–Meier plot show HR ± <N>% CI.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "HR, hazard ratio; <SYM>, progression-free survival; PR, partial response.",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Data were analyzed for overall survival using the Mantel-Cox log-rank test.",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "compared to",
+        "indicated doses",
+        "relative to",
+        "showed in",
+        "corresponds to"
+      ]
+    },
+    {
+      "id": "leg_sample_size_replicates",
+      "label": "图注样本量/重复",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "legend_sample_size",
+        "legend_replicates"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Mean ± s.d.; n = <N> biological replicates.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Pooled data from three independent experiments (n = <N>).",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Each dot is an independent biological replicate (ΔS n = <N> and ΔL n = <N>).",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "compared to",
+        "relative to",
+        "compared with",
+        "due to",
+        "indicated genes"
+      ]
+    },
+    {
+      "id": "leg_stat_test_correction",
+      "label": "图注统计检验校正",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "legend_statistics",
+        "legend_fdr"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "A two-sided log-rank test was used (P = <N>).",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "P values were calculated using a two-sided log-rank test.",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Adjusted p value < <N>, two-sided unpaired Wilcoxon test.",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "compared to",
+        "compared with",
+        "indicated by",
+        "relative to",
+        "indicated p"
+      ]
+    },
+    {
+      "id": "leg_boxplot_error_definition",
+      "label": "图注箱图误差定义",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "legend_boxplot",
+        "error_bar_definition"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "The whiskers in the boxplots mark the <N>% quantiles.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Box plots show median and quartiles, and whiskers depict <N>% CI.",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Bars represent the median with interquartile range for (B) and (C).",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "correspond to",
+        "compared with",
+        "relative to",
+        "indicated by",
+        "corresponds to"
+      ]
+    },
+    {
+      "id": "leg_scale_norm_clipping",
+      "label": "图注标度归一",
+      "sections": [
+        "figure_legends"
+      ],
+      "aliases": [
+        "legend_scaling",
+        "color_clipping"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "The color scale represents row z-scores (A).",
+          "genre": "clinical",
+          "section": "figure_legends",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "The colour bar tissue maximum is normalized to <N>%.",
+          "genre": "nature",
+          "section": "figure_legends",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Each dot is colored by the mean expression and sized by the scaled mean (Z scores).",
+          "genre": "cell",
+          "section": "figure_legends",
+          "family": "passive_measurement"
+        }
+      ],
+      "collocations": [
+        "led to",
+        "relative to",
+        "indicated by",
+        "indicated in",
+        "indicated time"
+      ]
+    },
+    {
+      "id": "pathway_activity_inference",
+      "label": "通路活性推断",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "ulm_activity",
+        "progeny_activity",
+        "geneset_scoring"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.1,
+      "skeletons": [
+        {
+          "skeleton": "Pathway activity across spots was assessed using AUCell (v1.<N>) [<N>].",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The AUCell package (v1.<N>)<N> was used to quantify the gene set activity in single cells.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "The Gseapy76 v.<N> ssgsea tool with the sample_norm_method = ‘rank’ was used for gene set signature scoring.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "formulaic"
+        }
+      ],
+      "collocations": [
+        "we found",
+        "suggesting that",
+        "additional file",
+        "results in",
+        "suggested that"
+      ]
+    },
+    {
+      "id": "within_patient_pairing",
+      "label": "患者内配对分析",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "patient_paired_comparison",
+        "intrapatient_pairing"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "For each of the staining, paired samples from same patients were used.",
+          "genre": "cell",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Briefly, between <N> ml and <N> ml of frozen plasma from each patient was sent to <SYM>.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Datasets A and C originate from the same patient, while Datasets B and D are from another patient.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "moreover",
+        "we compared",
+        "specifically",
+        "in summary",
+        "induced by"
+      ]
+    },
+    {
+      "id": "partial_correlation_residual",
+      "label": "偏相关残差",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "covariate_adjusted_correlation",
+        "residual_correlation"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.3,
+      "skeletons": [
+        {
+          "skeleton": "Results were relatively consistent when we adjusted for <SYM> when available.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Consequently, the Cox model was adjusted for age, baseline <SYM>, and etiology.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Resulting P values were adjusted for multiple comparisons via the BY correction.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "similarly",
+        "we assessed",
+        "we examined",
+        "was associated"
+      ]
+    },
+    {
+      "id": "survival_multivariable_cox",
+      "label": "生存多变量 Cox",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "cox_regression",
+        "prognostic_modeling"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "For <SYM>, we reported cross-validated C-index values as the mean across five folds.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "Associations with <SYM> and OS was evaluated using Cox proportional hazards regression.",
+          "genre": "clinical",
+          "section": "methods",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Multivariate Cox regression analysis of survival was repeated using colistin among covariates.",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "compared with",
+        "supplementary table",
+        "compared to",
+        "was associated",
+        "showed that"
+      ]
+    },
+    {
+      "id": "subtype_classification_roc",
+      "label": "亚型分类 ROC",
+      "sections": [
+        "methods",
+        "results"
+      ],
+      "aliases": [
+        "roc_discrimination",
+        "classifier_validation"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.2,
+      "skeletons": [
+        {
+          "skeleton": "The best <SYM> classifier was selected using CV <SYM>.",
+          "genre": "nature",
+          "section": "methods",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "(K) As in (I), comparing the glial cell subtype proportions (tier <N>).",
+          "genre": "cell",
+          "section": "results",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Finally, we rebuild the circumscribed classifiers on the whole study population.",
+          "genre": "clinical",
+          "section": "results",
+          "family": "short_anchor"
+        }
+      ],
+      "collocations": [
+        "supplementary table",
+        "compared to",
+        "consistent with",
+        "compared with",
+        "we observed"
+      ]
+    },
+    {
+      "id": "results_subheading_declarative",
+      "label": "结果小节标题",
+      "sections": [
+        "subheadings"
+      ],
+      "aliases": [
+        "subheading_declarative",
+        "results_heading"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "<SYM> T cells drive the recruitment of <SYM> to the site of infection",
+          "genre": "nature",
+          "section": "subheadings",
+          "family": "subject_driven"
+        },
+        {
+          "skeleton": "<SYM>+ T cells with the “S%<SYM>” motif were also detected in healthy donors",
+          "genre": "cell",
+          "section": "subheadings",
+          "family": "passive_measurement"
+        },
+        {
+          "skeleton": "Timing of <SYM> use and its correlation with post-irAE <SYM>/OS in patients who are irAE(+)",
+          "genre": "clinical",
+          "section": "subheadings",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": []
+    },
+    {
+      "id": "disc_opening_convergence",
+      "label": "讨论开篇汇聚",
+      "sections": [
+        "discussion"
+      ],
+      "aliases": [
+        "discussion_opening",
+        "evidence_convergence"
+      ],
+      "status": "confirmed",
+      "skeletons": [
+        {
+          "skeleton": "Nevertheless, a few limitations remain in the present study.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Collectively, these results illustrate the advantages of optimal intranasal immunization.",
+          "genre": "cell",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "Collectively, GPs may improve the response to PD-<N> inhibitor via decreasing <SYM> activity.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "in summary",
+        "overall",
+        "collectively",
+        "taken together",
+        "suggest that"
+      ]
+    },
+    {
+      "id": "disc_mechanistic_decoupling",
+      "label": "讨论机制解耦",
+      "sections": [
+        "discussion"
+      ],
+      "aliases": [
+        "rna_phenotype_decoupling",
+        "mechanistic_nuance"
+      ],
+      "status": "candidate",
+      "dualJudgePrecision": 0.5,
+      "skeletons": [
+        {
+          "skeleton": "<SYM> are characterized by elevated expression of <SYM> transcripts and <SYM> protein.",
+          "genre": "nature",
+          "section": "discussion",
+          "family": "short_anchor"
+        },
+        {
+          "skeleton": "The gene-expression programs we have discovered can potentially be influenced by tissue dissociation processes.",
+          "genre": "clinical",
+          "section": "discussion",
+          "family": "formulaic"
+        },
+        {
+          "skeleton": "Understanding the mechanisms underlying this decoupling could lead to targets for host-directed antiviral therapy.",
+          "genre": "cell",
+          "section": "discussion",
+          "family": "subject_driven"
+        }
+      ],
+      "collocations": [
+        "suggests that",
+        "driven by",
+        "second",
+        "contributes to",
+        "remains unclear"
+      ]
+    }
+  ]
+}

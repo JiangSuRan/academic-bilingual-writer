@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "sync:skill": "node scripts/sync-skill-assets.mjs",
     "tauri": "tauri"
   },
   "dependencies": {

@@ -1,13 +1,19 @@
 // 段落卡片:中/英两栏共用;组合输入守卫、Enter 拆段、Backspace 并段、Ctrl+Enter 翻译
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   Trash2, Copy, Sparkles, Check, X, RefreshCw, Plus, Square, AlertTriangle,
-  SpellCheck, Minimize2, Wand2,
+  SpellCheck, Minimize2, Wand2, Scissors, RotateCcw, CheckCircle2, MessageSquarePlus, ChevronDown, ChevronUp,
 } from 'lucide-react'
 import { useStore } from '../store/docStore'
 import { paraStatus, STATUS_META, splitAt } from '../lib/paragraphs'
 import { nanoid } from '../lib/nanoid'
 import { SCENE_LABELS } from '../lib/prompts'
+import {
+  analyzeParagraphStyle,
+  auditEnglishPolish,
+  auditZhToEnFidelity,
+  suggestAuthorPrompts,
+} from '../lib/polishAudit'
 import type { Paragraph, Scene } from '../types'
 
 type Side = 'zh' | 'en'
@@ -30,10 +36,14 @@ export default function ParaCard({
   const streamed = useStore((s) => s.streamingEn[para.id])
   const active = useStore((s) => s.activeParaId === para.id)
   const fontSize = useStore((s) => (side === 'zh' ? s.config.zhFontSize : s.config.enFontSize))
+  const showAuthorSlots = useStore((s) => s.config.showAuthorSlots)
 
   const taRef = useRef<HTMLTextAreaElement>(null)
   const composingRef = useRef(false)
   const [, forceTick] = useState(0)
+  const [auditOpen, setAuditOpen] = useState(false)
+  const [authorOpen, setAuthorOpen] = useState(false)
+  const [authorDraft, setAuthorDraft] = useState('')
 
   // 自动增高:内容变化(含流式输出)后重算高度
   useEffect(() => {
@@ -45,6 +55,28 @@ export default function ParaCard({
 
   const displayValue =
     side === 'en' && translating && streamed !== undefined ? streamed : side === 'zh' ? para.zh : para.en
+
+  const hasEnText = side === 'en' && !translating && para.en.trim().length > 0
+  const zhAudit = useMemo(
+    () => (hasEnText ? auditZhToEnFidelity(para.zh, para.en) : null),
+    [hasEnText, para.zh, para.en],
+  )
+  const styleAudit = useMemo(
+    () => (hasEnText ? analyzeParagraphStyle(para.en, para.scene) : null),
+    [hasEnText, para.en, para.scene],
+  )
+  const authorPrompts = useMemo(
+    () => (hasEnText && showAuthorSlots ? suggestAuthorPrompts(para.en, para.scene) : []),
+    [hasEnText, showAuthorSlots, para.en, para.scene],
+  )
+  const pendingDiff = useMemo(() => {
+    if (side !== 'en' || para.enPending === null || !para.en.trim()) return null
+    return auditEnglishPolish(para.en, para.enPending)
+  }, [side, para.en, para.enPending])
+  const pendingZhDiff = useMemo(() => {
+    if (side !== 'en' || para.enPending === null) return null
+    return auditZhToEnFidelity(para.zh, para.enPending)
+  }, [side, para.zh, para.enPending])
 
   const handleFocus = () => {
     useStore.getState().setActive(para.id)
@@ -178,11 +210,172 @@ export default function ParaCard({
         </div>
       )}
 
+      {!isZh && hasEnText && styleAudit && zhAudit && (
+        <div className="audit-wrap">
+          <div className="audit-strip">
+            <span className="audit-metrics">
+              {styleAudit.nWords}w · {styleAudit.nSents}句 · p50={styleAudit.sentlenP50}w
+            </span>
+            <span className={`audit-pill ${zhAudit.ok ? 'good' : 'bad'}`} title="中英数值/引用/缩略词确定性锚点校验">
+              {zhAudit.ok ? (
+                <><CheckCircle2 size={11} /> 保真</>
+              ) : (
+                <><AlertTriangle size={11} /> {zhAudit.issues.map((i) => `${i.label}:${i.tokens.join(',')}`).join('；')}</>
+              )}
+            </span>
+            {styleAudit.flags.slice(0, 3).map((flag) => (
+              <button
+                key={flag.code}
+                className={`audit-pill clickable ${flag.severity === 'rework' ? 'bad' : flag.severity === 'warn' ? 'warn' : 'info'}`}
+                onClick={() => setAuditOpen((v) => !v)}
+                title={flag.detail}
+              >
+                {flag.label}
+              </button>
+            ))}
+            {styleAudit.flags.length > 0 && (
+              <button className="audit-toggle" onClick={() => setAuditOpen((v) => !v)}>
+                {auditOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                {styleAudit.flags.length} 项建议
+              </button>
+            )}
+            {(styleAudit.reworkable || !zhAudit.ok) && (
+              <button
+                className="audit-rework-btn"
+                onClick={() => void useStore.getState().polish(para.id, 'rework')}
+                title="按以下问题清单执行纯减法回炉修正，保留全部数据与事实"
+              >
+                <RotateCcw size={11} /> 按清单回炉
+              </button>
+            )}
+            {authorPrompts.length > 0 && (
+              <button
+                className={`audit-pill clickable ${authorOpen ? 'active' : 'info'}`}
+                onClick={() => setAuthorOpen((v) => !v)}
+                style={{ marginLeft: 'auto' }}
+                title="可选：补充研究者第一手设计与边界说明"
+              >
+                <MessageSquarePlus size={11} /> 作者意图 ({authorPrompts.length})
+              </button>
+            )}
+          </div>
+
+          {auditOpen && styleAudit.flags.length > 0 && (
+            <div className="audit-detail">
+              {styleAudit.flags.map((f) => (
+                <div key={f.code} className={`ad-row ${f.severity}`}>
+                  <div className="ad-title">
+                    <strong>{f.label}</strong>
+                    <span>{f.detail}</span>
+                  </div>
+                  <div className="ad-hint">修改建议：{f.reworkHint}</div>
+                  {f.substitutes && f.substitutes.length > 0 && (
+                    <div className="ad-subs">
+                      人写顶刊参考替换：
+                      {f.substitutes.map((s) => (
+                        <code key={s.target}>
+                          {s.target} → {s.replacements.join(' / ')}
+                        </code>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {authorOpen && authorPrompts.length > 0 && (
+            <div className="author-slot-box">
+              {authorPrompts.map((ap) => (
+                <div key={ap.id} className="as-question">
+                  <strong>{ap.label}：</strong>
+                  <span>{ap.question}</span>
+                </div>
+              ))}
+              <div className="as-input-row">
+                <input
+                  className="text-input"
+                  value={authorDraft}
+                  placeholder={authorPrompts[0].placeholder}
+                  onChange={(e) => setAuthorDraft(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && authorDraft.trim()) {
+                      e.preventDefault()
+                      const txt = authorDraft
+                      setAuthorDraft('')
+                      setAuthorOpen(false)
+                      void useStore.getState().insertAuthorNote(para.id, txt, false)
+                    }
+                  }}
+                />
+                <button
+                  className="mini-btn primary"
+                  disabled={!authorDraft.trim()}
+                  onClick={() => {
+                    const txt = authorDraft
+                    setAuthorDraft('')
+                    setAuthorOpen(false)
+                    void useStore.getState().insertAuthorNote(para.id, txt, false)
+                  }}
+                >
+                  译入润色
+                </button>
+                <button
+                  className="mini-btn"
+                  disabled={!authorDraft.trim()}
+                  onClick={() => {
+                    const txt = authorDraft
+                    setAuthorDraft('')
+                    setAuthorOpen(false)
+                    void useStore.getState().insertAuthorNote(para.id, txt, true)
+                  }}
+                  title="若输入框内已是英文句子，直接拼入新版本缓冲"
+                >
+                  英文直插
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {pending && (
         <div className="pending-banner">
           <div className="pb-head">
             <Wand2 size={13} /> 新版本已生成(保留原稿,确认后替换)
+            {pendingDiff && (
+              <span className={`audit-pill ${pendingDiff.ok ? 'good' : 'bad'}`} style={{ marginLeft: 'auto' }}>
+                {pendingDiff.ok
+                  ? `保真门禁通过 (${pendingDiff.sourceWords}→${pendingDiff.targetWords}w, ${
+                      pendingDiff.wordDeltaPct >= 0 ? '+' : ''
+                    }${pendingDiff.wordDeltaPct}%)`
+                  : `注意：${pendingDiff.hardFlags.map((f) => f.label).join('；')}`}
+              </span>
+            )}
           </div>
+          {((pendingDiff && (pendingDiff.hardFlags.length > 0 || pendingDiff.softWarnings.length > 0)) ||
+            (pendingZhDiff && !pendingZhDiff.ok)) && (
+            <div className="pb-diff-notes">
+              {pendingDiff?.hardFlags.map((f) => (
+                <div key={f.code} className="pb-note bad">
+                  <strong>{f.label}：</strong>
+                  {f.detail}
+                </div>
+              ))}
+              {pendingZhDiff && !pendingZhDiff.ok && (
+                <div className="pb-note bad">
+                  <strong>中文锚点校验：</strong>
+                  {pendingZhDiff.issues.map((i) => `${i.label} (${i.tokens.join(', ')})`).join('；')}
+                </div>
+              )}
+              {pendingDiff?.softWarnings.map((w) => (
+                <div key={w.code} className="pb-note warn">
+                  <strong>{w.label}：</strong>
+                  {w.detail}
+                </div>
+              ))}
+            </div>
+          )}
           <textarea value={para.enPending ?? ''} readOnly rows={Math.min(8, Math.max(2, (para.enPending ?? '').split('\n').length))} />
           <div className="pending-actions">
             <button className="accept" onClick={() => useStore.getState().acceptPending(para.id)}>
@@ -223,7 +416,7 @@ function SceneSelect({ para }: { para: Paragraph }) {
   )
 }
 
-/** 英文区 AI 操作按钮组:润色 / 语法 / 简化 / 停止 */
+/** 英文区 AI 操作按钮组:润色 / 精缩 / 语法 / 简化 / 停止 */
 function EnActions({ para, translating }: { para: Paragraph; translating: boolean }) {
   const hasEn = para.en.trim().length > 0
   if (translating) {
@@ -235,9 +428,13 @@ function EnActions({ para, translating }: { para: Paragraph; translating: boolea
   }
   return (
     <>
-      <button className="pt-btn wide" title="润色:改进表达,保留全部事实" disabled={!hasEn}
+      <button className="pt-btn wide" title="顶刊润色:改进表达,消除 AI 腔并保留全部事实" disabled={!hasEn}
         onClick={() => void useStore.getState().polish(para.id, 'polish')}>
         <Wand2 size={12} /> 润色
+      </button>
+      <button className="pt-btn wide" title="精缩:纯减法削减 15-25% 冗余修饰,严格保真" disabled={!hasEn}
+        onClick={() => void useStore.getState().polish(para.id, 'compress')}>
+        <Scissors size={12} /> 精缩
       </button>
       <button className="pt-btn wide" title="语法检查:最小修正" disabled={!hasEn}
         onClick={() => void useStore.getState().polish(para.id, 'grammar')}>

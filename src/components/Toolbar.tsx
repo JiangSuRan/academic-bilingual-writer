@@ -1,5 +1,5 @@
 import {
-  FilePlus2, FolderOpen, Save, Copy, Settings2, Moon, Sun, Languages,
+  FilePlus2, FolderOpen, Save, Copy, Settings2, Moon, Sun, Languages, Activity,
 } from 'lucide-react'
 import { useStore } from '../store/docStore'
 
@@ -16,6 +16,7 @@ export default function Toolbar() {
   const copyAllEn = useStore((s) => s.copyAllEn)
   const translateAllPending = useStore((s) => s.translateAllPending)
   const openSettings = useStore((s) => s.openSettings)
+  const openReview = useStore((s) => s.openReview)
   const toggleTheme = useStore((s) => s.toggleTheme)
   const updateConfig = useStore((s) => s.updateConfig)
 
@@ -71,6 +72,13 @@ export default function Toolbar() {
       </button>
       <button className="tb-btn" title="复制全部英文为纯文本 (Ctrl+Shift+C)" onClick={() => void copyAllEn()}>
         <Copy size={15} /> 复制英文
+      </button>
+      <button
+        className="tb-btn"
+        title="全稿学术体检：检查节预算、De-AI 表达与跨段节奏"
+        onClick={() => openReview(true)}
+      >
+        <Activity size={15} /> 全稿体检
       </button>
       <span className="tb-sep" />
       <button className="tb-btn" title={config.theme === 'dark' ? '切换到浅色' : '切换到深色'} onClick={toggleTheme}>
